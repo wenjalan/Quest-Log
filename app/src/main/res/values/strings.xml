@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Quest Log App</string>
+    <string name="app_name">Quest Log</string>
+    <string name="hello_world">Hello world!</string>
 </resources>
