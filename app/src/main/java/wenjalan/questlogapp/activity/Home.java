@@ -1,7 +1,9 @@
-package wenjalan.questlogapp;
+package wenjalan.questlogapp.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import wenjalan.questlogapp.R;
 
 public class Home extends AppCompatActivity {
 
