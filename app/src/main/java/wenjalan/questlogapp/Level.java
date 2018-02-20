@@ -22,6 +22,11 @@ public class Level {
         init();
         this.user = user;
         this.perks = perkTable;
+
+        // Log for debugging purposes
+        if (QuestLog.DEBUG) {
+            Log.d("QuestLogApp", "Created new Level for User " + user.getName());
+        }
     }
 
 // Methods //
@@ -30,11 +35,6 @@ public class Level {
         this.userLevel = 1;                 // User starts at level 1
         this.userExperience = 0;            // User starts with 0 EXP
         this.nextLevelExperience = 100;     // EXP to get to next level is 100
-
-        // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Created new Level for User " + user.getName());
-        }
     }
 
     // adds an amount of EXP to this user's Level
@@ -101,6 +101,9 @@ public class Level {
     public int getExp() {
         return this.userExperience;
     }
+
+    // returns the required exp for the next level
+    public int getExpToNextLevel() { return this.nextLevelExperience; }
 
     // returns the owner of this Level
     public User getOwner() {

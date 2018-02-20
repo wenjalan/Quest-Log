@@ -27,6 +27,11 @@ public class PerkTable {
     public PerkTable(User user) {
         init();
         this.user = user;
+
+        // Log for debugging purposes
+        if (QuestLog.DEBUG) {
+            Log.d("QuestLogApp", "Created new PerkTable for User " + user.getName());
+        }
     }
 
 // Methods //
@@ -38,11 +43,6 @@ public class PerkTable {
         this.perks.put(Perks.PHYSICAL, 0);
         this.perks.put(Perks.MENTAL, 0);
         this.perks.put(Perks.SOCIAL, 0);
-
-        // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Created new PerkTable for User " + user.getName());
-        }
     }
 
     // adds points to a Perk

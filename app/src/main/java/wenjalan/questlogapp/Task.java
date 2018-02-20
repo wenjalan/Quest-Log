@@ -1,6 +1,8 @@
 package wenjalan.questlogapp;
 // Represents a single subTask of a SideQuest
 
+import android.util.Log;
+
 public class Task implements Completable {
 
 // Fields //
@@ -23,6 +25,11 @@ public class Task implements Completable {
     // completes this Task
     public void complete() {
         this.isComplete = true;
+
+        // Log for debugging purposes
+        if (QuestLog.DEBUG) {
+            Log.d("QuestLogApp", "Completed task \"" + this.description + "\"");
+        }
     }
 
 // Getters //

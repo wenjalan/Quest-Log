@@ -10,9 +10,11 @@ public class User {
     private PerkTable perks;
     private Level level;
 
-    public User(String name) {
+// Constructor //
+    public User(String username) {
+        // set name before init because init uses name
+        this.name = username;
         init();
-        this.name = name;
     }
 
 // Methods //

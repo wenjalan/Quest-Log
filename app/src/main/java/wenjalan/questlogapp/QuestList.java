@@ -17,17 +17,17 @@ public class QuestList {
     public QuestList(User user) {
         init();
         this.user = user;
+
+        // Log for debugging purposes
+        if (QuestLog.DEBUG) {
+            Log.d("QuestLogApp", "Created new QuestList for User " + user.getName());
+        }
     }
 
 // Methods //
     // initialization
     private void init() {
         questList = new ArrayList<>();
-
-        // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Created new QuestList for User " + user.getName());
-        }
     }
 
     // grants exp to the user
@@ -45,7 +45,7 @@ public class QuestList {
         }
         else {
             if (QuestLog.DEBUG) {
-                Log.d("QuestLogApp", "Tried to reward user " + user.getName() + " for SideQuest " + quest.getName() + ", but it wasn't completed.");
+                Log.d("QuestLogApp", "Tried to reward user " + user.getName() + " for SideQuest " + quest.getName() + ", but it wasn't completed");
             }
         }
     }
@@ -57,7 +57,7 @@ public class QuestList {
 
         // Log for debugging purposes
         if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Added SideQuest " + quest.getName() + " to " + user.getName() + "'s QuestList.");
+            Log.d("QuestLogApp", "Added SideQuest " + quest.getName() + " to " + user.getName() + "'s QuestList");
         }
     }
 
@@ -67,7 +67,7 @@ public class QuestList {
 
         // Log for debugging purposes
         if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Removed SideQuest " + quest.getName() + " from " + user.getName() + "'s QuestList.");
+            Log.d("QuestLogApp", "Removed SideQuest " + quest.getName() + " from " + user.getName() + "'s QuestList");
         }
     }
 
@@ -77,7 +77,7 @@ public class QuestList {
 
         // Log for debugging purposes
         if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Removed SideQuest at index " + index + " from " + user.getName() + "'s QuestList.");
+            Log.d("QuestLogApp", "Removed SideQuest at index " + index + " from " + user.getName() + "'s QuestList");
         }
     }
 

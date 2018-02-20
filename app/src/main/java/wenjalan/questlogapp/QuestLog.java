@@ -16,21 +16,61 @@ public class QuestLog {
 
 // Constructors //
     public QuestLog(String username) {
-        init();
+        // Create a new User
         this.user = new User(username);
+
+        // if in debug mode, start test method
         if (QuestLog.DEBUG) {
             start();
         }
     }
 
-// Initialization //
-    private void init() {
-        // TODO: something?
+// Methods //
+    // loads data from a stored QuestLog app
+    public void loadFrom() {
+        // TODO: Actually make it load something
+        return;
     }
 
-// Methods //
+    // debugging method, ran if app is set to DEBUG mode
     private void start() {
-        Log.d("QuestLogApp", "Setup complete, running start() method.");
+        Log.d("QuestLogApp", "*** Setup complete, running start() method ***");
+
+        // get references to the User's things
+        QuestList quests = user.getQuestList();
+        PerkTable perks = user.getPerkTable();
+        Level level = user.getLevel();
+
+        // create a new quest to test
+        SideQuest quest = new SideQuest(
+                quests,
+                "Project 34",
+                "Complete your IA for IBCS SL",
+                100
+        );
+
+        // add a few tasks
+        quest.addTasks(
+            new Task("Plan it"),
+            new Task("Code it"),
+            new Task("Write it")
+        );
+
+        // complete task 0
+        quest.completeTasks(0);
+
+        // add the quest to the questList
+        quests.addQuest(quest);
+
+        // complete more tasks
+        quest.completeTasks(1, 2);
+
+    }
+
+// Getters //
+    // returns the User of this QuestLog
+    public User getUser() {
+        return this.user;
     }
 
 }

@@ -19,12 +19,18 @@ public class SideQuest implements Completable {
     private ArrayList<Task> tasks;          // the list of Tasks to complete this SideQuest
 
 // Constructor //
+    // TODO: Make SideQuest auto-add itself to a QuestList upon creation?
     public SideQuest(QuestList questList, String name, String description, int expReward) {
         init();
         this.questList = questList;
         this.name = name;
         this.description = description;
         this.expReward = expReward;
+
+        // Log for debugging purposes
+        if (QuestLog.DEBUG) {
+            Log.d("QuestLogApp", "Created new SideQuest " + this.name);
+        }
     }
 
     public SideQuest(QuestList questList, String name, String description, int expReward, String perkCategory) {
@@ -34,6 +40,11 @@ public class SideQuest implements Completable {
         this.description = description;
         this.expReward = expReward;
         this.perkCategory = perkCategory;
+
+        // Log for debugging purposes
+        if (QuestLog.DEBUG) {
+            Log.d("QuestLogApp", "Created new SideQuest " + this.name);
+        }
     }
 
     public SideQuest(QuestList questList, String name, String description, int expReward, String perkCategory, Task... tasks) {
@@ -44,6 +55,11 @@ public class SideQuest implements Completable {
         this.expReward = expReward;
         this.perkCategory = perkCategory;
         this.addTasks(tasks);
+
+        // Log for debugging purposes
+        if (QuestLog.DEBUG) {
+            Log.d("QuestLogApp", "Created new SideQuest " + this.name);
+        }
     }
 
 // Methods //
@@ -55,11 +71,6 @@ public class SideQuest implements Completable {
         this.perkCategory = null;
         this.isComplete = false;
         this.tasks = new ArrayList<Task>();
-
-        // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Created new SideQuest.");
-        }
     }
 
     // completes this SideQuest
@@ -82,6 +93,11 @@ public class SideQuest implements Completable {
     public void addTasks(Task... tasks) {
         for (Task t : tasks) {
             this.tasks.add(t);
+        }
+
+        // Log for debugging purposes
+        if (QuestLog.DEBUG) {
+            Log.d("QuestLogApp", "Added task(s) to SideQuest " + this.name);
         }
     }
 
