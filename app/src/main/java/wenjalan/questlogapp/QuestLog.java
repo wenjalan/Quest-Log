@@ -46,7 +46,7 @@ public class QuestLog {
                 quests,
                 "Project 34",
                 "Complete your IA for IBCS SL",
-                100
+                80
         );
 
         // add a few tasks

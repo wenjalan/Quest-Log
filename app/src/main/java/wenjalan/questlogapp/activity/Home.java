@@ -25,9 +25,6 @@ public class Home extends AppCompatActivity {
 
 // References //
     private User user;
-    private QuestList questList;
-    private Level level;
-    private PerkTable perkTable;
 
 // Layout References //
     private LinearLayout questListLinearLayout;
@@ -61,9 +58,6 @@ public class Home extends AppCompatActivity {
 
         // get references from the questLog
         this.user = this.questLog.getUser();
-        this.questList = this.user.getQuestList();
-        this.level = this.user.getLevel();
-        this.perkTable = this.user.getPerkTable();
     }
 
     // modifies on-screen content to match internal states
@@ -92,8 +86,10 @@ public class Home extends AppCompatActivity {
     private void updateUserLevelText() {
         // get a reference to the TextView
         TextView userLevelTextView = findViewById(R.id.userLevelTextView);
+        // get a reference to the User's Level
+        Level userLevel = this.user.getLevel();
         // get the User's current level
-        int level = this.level.getLevel();
+        int level = userLevel.getLevel();
         // update the text
         userLevelTextView.setText("Level " + level);
     }
@@ -102,10 +98,17 @@ public class Home extends AppCompatActivity {
     private void updateUserEXPBar() {
         // get a reference to the ProgressBar
         ProgressBar expBar = findViewById(R.id.userExpBar);
+        // get a reference to the User's Level
+        Level userLevel = user.getLevel();
         // get the user's current progress towards their next level
-        int progress = (int) (this.level.getExp() / this.level.getExpToNextLevel()) * 100;
+        int progress = (int) ((double) userLevel.getExp() / (double) userLevel.getExpToNextLevel() * 100);
         // update the progress
         expBar.setProgress(progress);
+
+        // debug
+        if (QuestLog.DEBUG) {
+            Log.d("Home", "Set EXP bar progress to " + progress + " percent");
+        }
     }
 
 
