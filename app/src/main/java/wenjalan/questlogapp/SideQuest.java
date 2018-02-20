@@ -1,10 +1,6 @@
 package wenjalan.questlogapp;
 // Represents a SideQuest within a QuestList
 
-/**
- * Created by Alan on 2/17/2018.
- */
-
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -142,6 +138,7 @@ public class SideQuest implements Completable {
     }
 
     // returns the Perk this SideQuest is associated with
+    // TODO: Ensure it works with no perk category
     public String getPerkCategory() {
         return this.perkCategory;
     }

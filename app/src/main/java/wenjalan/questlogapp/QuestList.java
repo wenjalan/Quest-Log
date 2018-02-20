@@ -1,8 +1,6 @@
 package wenjalan.questlogapp;
 // Represents a User's list of quests
-/**
- * Created by Alan on 2/17/2018.
- */
+
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -35,7 +33,21 @@ public class QuestList {
     // grants exp to the user
     // called from a SideQuest upon completion
     public void rewardUserFor(SideQuest quest) {
-        // TODO: write this
+        int exp = quest.getExpReward();
+        String perk = quest.getPerkCategory();
+        if (quest.isComplete()) {
+            user.getLevel().addExp(exp, perk);
+
+            // debug
+            if (QuestLog.DEBUG) {
+                Log.d("QuestLogApp", "Rewarding user " + user.getName() + " for SideQuest " + quest.getName() + "...");
+            }
+        }
+        else {
+            if (QuestLog.DEBUG) {
+                Log.d("QuestLogApp", "Tried to reward user " + user.getName() + " for SideQuest " + quest.getName() + ", but it wasn't completed.");
+            }
+        }
     }
 
 // Setters //

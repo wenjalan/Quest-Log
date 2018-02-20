@@ -1,6 +1,6 @@
 package wenjalan.questlogapp;
 // Represents an instance of the app
-// Owns User
+// Owns the instance of User
 
 import android.util.Log;
 
@@ -16,6 +16,7 @@ public class QuestLog {
 
 // Constructors //
     public QuestLog(String username) {
+        init();
         this.user = new User(username);
         if (QuestLog.DEBUG) {
             start();
@@ -24,11 +25,11 @@ public class QuestLog {
 
 // Initialization //
     private void init() {
-        // TODO: initialization
+        // TODO: something?
     }
 
 // Methods //
-    public void start() {
+    private void start() {
         Log.d("QuestLogApp", "Setup complete, running start() method.");
     }
 

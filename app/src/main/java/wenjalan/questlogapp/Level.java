@@ -3,10 +3,6 @@ package wenjalan.questlogapp;
 
 import android.util.Log;
 
-/**
- * Created by Alan on 2/17/2018.
- */
-
 public class Level {
 
 // References //
@@ -47,7 +43,7 @@ public class Level {
         int sourceExp = exp;
 
         // if the EXP comes with a perk, get the bonus
-        if (!perk.equals(null)) {
+        if (perk != null) {
             exp += getPerkBonusExp(exp, perk);
         }
 
@@ -78,11 +74,9 @@ public class Level {
         }
     }
 
-    // TODO: Write PerkTable to handle this request
     // returns the amount of exp from the perk bonus
     private int getPerkBonusExp(int exp, String perk) {
-        // return exp * (perks.getPointsIn(perk) * PERK_BONUS_MULT);
-        return 0;
+        return (int) (exp * (perks.getPointsIn(perk) * PERK_BONUS_MULT));
     }
 
     // levels up the user
@@ -90,9 +84,8 @@ public class Level {
         // increment user's level by 1
         this.userLevel++;
 
-        // TODO: Make this work
         // add an unused Perk Point
-        // perks.addUnusedPerkPoints(1);
+        perks.addUnusedPoints(PERK_POINTS_PER_LEVEL);
 
         // increase the EXP needed to reach the next level
         this.nextLevelExperience *= NEXT_LEVEL_EXP_MULT;

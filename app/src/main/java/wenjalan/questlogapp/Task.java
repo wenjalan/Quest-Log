@@ -1,8 +1,5 @@
 package wenjalan.questlogapp;
-
-/**
- * Created by Alan on 2/18/2018.
- */
+// Represents a single subTask of a SideQuest
 
 public class Task implements Completable {
 

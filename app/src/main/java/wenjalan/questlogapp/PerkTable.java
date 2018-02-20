@@ -5,10 +5,6 @@ import android.util.Log;
 
 import java.util.HashMap;
 
-/**
- * Created by Alan on 2/17/2018.
- */
-
 public class PerkTable {
 
 // References //
@@ -53,7 +49,6 @@ public class PerkTable {
     public void addPoints(String perk, int points) {
         // check if the user had enough unused points
         if (points <= getPointsIn(Perks.UNUSED)) {
-            // TODO: Clean up?
             // add points to the perk
             this.perks.put(perk, this.perks.get(perk) + points);
             // consume used points
@@ -70,6 +65,11 @@ public class PerkTable {
                 Log.d("QuestLogApp", "Failed to add " + points + " points to " + perk + ", insufficient unused points.");
             }
         }
+    }
+
+    // adds unused Perk Points
+    public void addUnusedPoints(int points) {
+        this.perks.put(Perks.UNUSED, this.perks.get(Perks.UNUSED) + points);
     }
 
 // Getters //
