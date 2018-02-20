@@ -61,9 +61,8 @@ public class QuestLog {
 
         // add the quest to the questList
         quests.addQuest(quest);
-
-        // complete more tasks
-        quest.completeTasks(1, 2);
+        quests.addQuest(quest);
+        quests.addQuest(quest);
 
     }
 

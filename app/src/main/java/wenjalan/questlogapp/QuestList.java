@@ -92,6 +92,11 @@ public class QuestList {
         return this.user;
     }
 
+    // returns the number of Quests in this QuestList
+    public int quests() {
+        return this.questList.size();
+    }
+
     // toString, meant for debugging purposes only
     @Override
     public String toString() {

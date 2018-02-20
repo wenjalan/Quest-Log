@@ -138,6 +138,11 @@ public class SideQuest implements Completable {
         return tasks.get(index);
     }
 
+    // returns the number of Tasks this SideQuest has
+    public int tasks() {
+        return this.tasks.size();
+    }
+
     // returns the name of this SideQuest
     public String getName() {
         return this.name;

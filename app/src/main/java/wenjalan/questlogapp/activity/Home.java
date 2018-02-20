@@ -16,6 +16,8 @@ import wenjalan.questlogapp.PerkTable;
 import wenjalan.questlogapp.QuestList;
 import wenjalan.questlogapp.QuestLog;
 import wenjalan.questlogapp.R;
+import wenjalan.questlogapp.SideQuest;
+import wenjalan.questlogapp.Task;
 import wenjalan.questlogapp.User;
 
 public class Home extends AppCompatActivity {
@@ -25,11 +27,6 @@ public class Home extends AppCompatActivity {
 
 // References //
     private User user;
-
-// Layout References //
-    private LinearLayout questListLinearLayout;
-    private LayoutInflater inflater;
-    private ViewGroup questListScrollView;
 
 // Methods //
     @Override
@@ -47,9 +44,6 @@ public class Home extends AppCompatActivity {
 
     // initialization
     public void init() {
-        // get references to layout items to modify
-        getLayoutReferences();
-
         // create a new instance of QuestLog
         this.questLog = new QuestLog("Alan Wen");
 
@@ -64,16 +58,8 @@ public class Home extends AppCompatActivity {
     public void render() {
         // update the user's info bar
         updateUserInfobar();
-
         // update the list of quests
-        // updateQuestList();
-    }
-
-    // get references to any required views, called by onCreate()
-    private void getLayoutReferences() {
-        this.questListLinearLayout = (LinearLayout) findViewById(R.id.questListLinearLayout);
-        this.inflater = (LayoutInflater) getLayoutInflater();
-        this.questListScrollView = findViewById(R.id.questListScrollView);
+        updateQuestList();
     }
 
     // updates the userInfoBar in the layout
@@ -111,14 +97,62 @@ public class Home extends AppCompatActivity {
         }
     }
 
+    // updates the questListLinearLayout with all SideQuest instances
+    private void updateQuestList() {
+        // get the User's QuestList
+        QuestList questList = user.getQuestList();
+        // iterate through the list
+        for (int i = 0; i < questList.quests(); i++) {
+            SideQuest quest = questList.getQuest(i);
+            displayQuest(quest);
+        }
+    }
+
+    // displays a single sideQuest on the homepage
+    private void displayQuest(SideQuest sideQuest) {
+        // get a reference to the questListLinearLayout
+        LinearLayout questList = findViewById(R.id.questListLinearLayout);
+        // get an inflater
+        LayoutInflater inflater = getLayoutInflater();
+
+        // create a new View to hold the SideQuest in
+        View questView = inflater.inflate(R.layout.fragment_sidequest, questList, false);
+
+        // add the view
+        questList.addView(questView);
+
+        // edit the quest's fields to match those in the user's QuestList
+        // title
+        TextView title = questView.findViewById(R.id.sideQuestTitle);
+        title.setText(sideQuest.getName());
+
+        // description
+        TextView desc = questView.findViewById(R.id.sideQuestDesc);
+        desc.setText(sideQuest.getDescription());
+
+        // tasks
+        // get the task list Linear Layout
+        LinearLayout taskList = questView.findViewById(R.id.sideQuestTaskList);
+        // add the tasks
+        for (int i = 0; i < sideQuest.tasks(); i++) {
+            // get the current task
+            Task task = sideQuest.getTask(i);
+            // inflate a view
+            View taskView = inflater.inflate(R.layout.fragment_task, taskList, false);
+            // add the task
+            taskList.addView(taskView);
+            // edit the task's desc
+            TextView taskDesc = taskView.findViewById(R.id.taskDesc);
+            taskDesc.setText(task.getDescription());
+        }
+
+    }
+
 
 // Button Listeners //
     // called when the user taps the newQuestButton
     public void newQuest(View view) {
         Log.d("Home", "User tapped newQuestButton");
-
-        View sideQuest = inflater.inflate(R.layout.fragment_sidequest, questListLinearLayout, false);
-        questListLinearLayout.addView(sideQuest, questListLinearLayout.getChildCount() - 1);
     }
 
     // called when the user taps the userProfileButton
