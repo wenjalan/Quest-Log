@@ -1,6 +1,7 @@
 package wenjalan.questlogapp.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -167,6 +168,8 @@ public class Home extends AppCompatActivity {
     // called when the user taps the newQuestButton
     public void newQuest(View view) {
         Log.d("Home", "User tapped newQuestButton");
+        Intent i = new Intent(this, CreateQuest.class);
+        startActivity(i);
     }
 
     // called when the user taps the userProfileButton
