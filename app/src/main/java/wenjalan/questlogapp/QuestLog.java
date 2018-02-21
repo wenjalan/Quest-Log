@@ -46,7 +46,8 @@ public class QuestLog {
                 quests,
                 "Project 34",
                 "Complete your IA for IBCS SL",
-                80
+                80,
+                PerkTable.Perks.MENTAL
         );
 
         // add a few tasks
@@ -63,6 +64,11 @@ public class QuestLog {
         quests.addQuest(quest);
         quests.addQuest(quest);
         quests.addQuest(quest);
+        quests.addQuest(quest);
+        quests.addQuest(quest);
+        quests.addQuest(quest);
+
+        quests.getQuest(0).forceComplete();
 
     }
 

@@ -130,6 +130,20 @@ public class Home extends AppCompatActivity {
         TextView desc = questView.findViewById(R.id.sideQuestDesc);
         desc.setText(sideQuest.getDescription());
 
+        // perk
+        TextView perk = questView.findViewById(R.id.sideQuestPerk);
+        String questPerk = sideQuest.getPerkCategory();
+        if (questPerk != null) {
+            perk.setText(questPerk);
+        }
+        else {
+            perk.setText("");
+        }
+
+        // EXP reward
+        TextView expText = questView.findViewById(R.id.sideQuestEXP);
+        expText.setText("" + sideQuest.getExpReward() + " EXP"); // have to explicitly convert it to String
+
         // tasks
         // get the task list Linear Layout
         LinearLayout taskList = questView.findViewById(R.id.sideQuestTaskList);

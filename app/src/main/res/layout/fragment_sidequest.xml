@@ -13,23 +13,26 @@
 
         <TextView
             android:id="@+id/sideQuestTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:text="SideQuest"
+            android:textColor="@android:color/black"
             android:textSize="36sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/sideQuestDesc"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:text="SideQuestDescription"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/sideQuestTitle"
             app:layout_constraintTop_toBottomOf="@+id/sideQuestTitle" />
 
         <LinearLayout
@@ -42,6 +45,27 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sideQuestDesc"></LinearLayout>
+
+        <TextView
+            android:id="@+id/sideQuestPerk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Perk"
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toTopOf="@+id/sideQuestEXP"
+            app:layout_constraintEnd_toEndOf="@+id/sideQuestEXP"
+            app:layout_constraintStart_toStartOf="@+id/sideQuestEXP" />
+
+        <TextView
+            android:id="@+id/sideQuestEXP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="0 EXP"
+            app:layout_constraintBottom_toBottomOf="@+id/sideQuestTitle"
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>
