@@ -16,25 +16,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/homeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Home"
-            android:onClick="homeButton"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="New Quest"
@@ -42,8 +28,7 @@
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/homeButton"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
@@ -79,6 +64,42 @@
                 android:ems="10"
                 android:hint="Quest Description"
                 android:inputType="textMultiLine" />
+
+            <Spinner
+                android:id="@+id/perkSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/questExpField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="EXP Reward"
+                android:inputType="textPersonName" />
+
+            <LinearLayout
+                android:id="@+id/questTasksLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/questAddTaskButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="addTaskView"
+                android:text="Add Task" />
+
+            <Button
+                android:id="@+id/questCreateButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create Quest" />
 
         </LinearLayout>
     </ScrollView>

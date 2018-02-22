@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="perks_array">
+        <item>No Perk</item>
+        <item>Physical</item>
+        <item>Mental</item>
+        <item>Social</item>
+    </string-array>
+</resources>
