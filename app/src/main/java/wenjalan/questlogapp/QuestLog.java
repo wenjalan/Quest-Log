@@ -36,40 +36,39 @@ public class QuestLog {
     private void start() {
         Log.d("QuestLogApp", "*** Setup complete, running start() method ***");
 
-        // get references to the User's things
-        QuestList quests = user.getQuestList();
-        PerkTable perks = user.getPerkTable();
-        Level level = user.getLevel();
-
-        // create a new quest to test
-        SideQuest quest = new SideQuest(
-                quests,
-                "Project 34",
-                "Complete your IA for IBCS SL",
-                80,
-                PerkTable.Perks.MENTAL
-        );
-
-        // add a few tasks
-        quest.addTasks(
-            new Task("Plan it"),
-            new Task("Code it"),
-            new Task("Write it")
-        );
-
-        // complete task 0
-        quest.completeTasks(0);
-
-        // add the quest to the questList
-        quests.addQuest(quest);
-        quests.addQuest(quest);
-        quests.addQuest(quest);
-        quests.addQuest(quest);
-        quests.addQuest(quest);
-        quests.addQuest(quest);
-
-        quests.getQuest(0).forceComplete();
-
+//        // get references to the User's things
+//        QuestList quests = user.getQuestList();
+//        PerkTable perks = user.getPerkTable();
+//        Level level = user.getLevel();
+//
+//        // create a new quest to test
+//        SideQuest quest = new SideQuest(
+//                quests,
+//                "Project 34",
+//                "Complete your IA for IBCS SL",
+//                80,
+//                PerkTable.Perks.MENTAL
+//        );
+//
+//        // add a few tasks
+//        quest.addTasks(
+//            new Task("Plan it"),
+//            new Task("Code it"),
+//            new Task("Write it")
+//        );
+//
+//        // complete task 0
+//        quest.completeTasks(0);
+//
+//        // add the quest to the questList
+//        quests.addQuest(quest);
+//        quests.addQuest(quest);
+//        quests.addQuest(quest);
+//        quests.addQuest(quest);
+//        quests.addQuest(quest);
+//        quests.addQuest(quest);
+//
+//        quests.getQuest(0).forceComplete();
     }
 
 // Getters //

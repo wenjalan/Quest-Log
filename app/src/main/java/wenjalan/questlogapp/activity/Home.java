@@ -24,10 +24,11 @@ import wenjalan.questlogapp.User;
 public class Home extends AppCompatActivity {
 
 // Fields //
-    private QuestLog questLog;
+    // TODO: Make it a Parcelable instead of a global?
+    public static QuestLog questLog;
 
 // References //
-    private User user;
+    public User user;
 
 // Methods //
     @Override
@@ -35,6 +36,12 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        render();
     }
 
     // runs on startup
@@ -46,13 +53,13 @@ public class Home extends AppCompatActivity {
     // initialization
     public void init() {
         // create a new instance of QuestLog
-        this.questLog = new QuestLog("Alan Wen");
+        Home.questLog = new QuestLog("Alan Wen");
 
         // load stored info
-        this.questLog.loadFrom();
+        Home.questLog.loadFrom();
 
         // get references from the questLog
-        this.user = this.questLog.getUser();
+        this.user = Home.questLog.getUser();
     }
 
     // modifies on-screen content to match internal states

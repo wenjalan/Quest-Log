@@ -99,6 +99,7 @@
                 android:id="@+id/questCreateButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="createQuest"
                 android:text="Create Quest" />
 
         </LinearLayout>
