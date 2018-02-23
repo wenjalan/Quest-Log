@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Perk"
-            android:textAlignment="viewStart"
+            android:textAlignment="textEnd"
             app:layout_constraintBottom_toTopOf="@+id/sideQuestEXP"
             app:layout_constraintEnd_toEndOf="@+id/sideQuestEXP"
             app:layout_constraintStart_toStartOf="@+id/sideQuestEXP" />

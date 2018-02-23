@@ -107,6 +107,8 @@ public class Home extends AppCompatActivity {
 
     // updates the questListLinearLayout with all SideQuest instances
     private void updateQuestList() {
+        // clear the existing list, if it exists
+        clearQuestViews();
         // get the User's QuestList
         QuestList questList = user.getQuestList();
         // iterate through the list
@@ -114,6 +116,12 @@ public class Home extends AppCompatActivity {
             SideQuest quest = questList.getQuest(i);
             displayQuest(quest);
         }
+    }
+
+    // clears the SideQuests off the screen to refresh
+    private void clearQuestViews() {
+        LinearLayout questList = findViewById(R.id.questListLinearLayout);
+        questList.removeAllViews();
     }
 
     // displays a single sideQuest on the homepage
