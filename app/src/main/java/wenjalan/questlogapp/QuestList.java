@@ -36,7 +36,11 @@ public class QuestList {
         int exp = quest.getExpReward();
         String perk = quest.getPerkCategory();
         if (quest.isComplete()) {
+            // reward exp
             user.getLevel().addExp(exp, perk);
+            // remove quest
+            // TODO: Move to history instead of removing
+            questList.remove(quest);
 
             // debug
             if (QuestLog.DEBUG) {

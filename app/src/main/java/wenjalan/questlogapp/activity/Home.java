@@ -2,12 +2,14 @@ package wenjalan.questlogapp.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -44,6 +46,12 @@ public class Home extends AppCompatActivity {
         render();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        save();
+    }
+
     // runs on startup
     public void start() {
         init();
@@ -51,23 +59,37 @@ public class Home extends AppCompatActivity {
     }
 
     // initialization
-    public void init() {
-        // create a new instance of QuestLog
-        Home.questLog = new QuestLog("Alan Wen");
-
-        // load stored info
-        Home.questLog.loadFrom();
+    private void init() {
+        // TODO: Load saved data
+        if (QuestLog.CLEAN_BOOT) {
+            // create a new instance of QuestLog
+            Home.questLog = new QuestLog("Alan Wen");
+        }
+        else {
+            // load QuestLog from storage
+            load();
+        }
 
         // get references from the questLog
         this.user = Home.questLog.getUser();
     }
 
     // modifies on-screen content to match internal states
-    public void render() {
+    private void render() {
         // update the user's info bar
         updateUserInfobar();
         // update the list of quests
         updateQuestList();
+    }
+
+    // loads the user's QuestLog from storage
+    private void load() {
+        // TODO: load data
+    }
+
+    // saves the user's QuestLog to storage
+    private void save() {
+        // TODO: Save data
     }
 
     // updates the userInfoBar in the layout
@@ -115,7 +137,9 @@ public class Home extends AppCompatActivity {
         // iterate through the list
         for (int i = 0; i < questList.quests(); i++) {
             SideQuest quest = questList.getQuest(i);
-            displayQuest(quest);
+            if (!quest.isComplete()) {
+                displayQuest(quest);
+            }
         }
     }
 
@@ -170,6 +194,7 @@ public class Home extends AppCompatActivity {
             Task task = sideQuest.getTask(i);
             // inflate a view
             View taskView = inflater.inflate(R.layout.fragment_task, taskList, false);
+
             // add the task
             taskList.addView(taskView);
             // edit the task's desc
@@ -193,6 +218,40 @@ public class Home extends AppCompatActivity {
         Log.d("Home", "User tapped userProfileButton");
         Intent i = new Intent(this, Profile.class);
         startActivity(i);
+    }
+
+    // called when the User completes a Task
+    public void toggleTaskStatus(View view) {
+        // TODO: Make this less bad
+        // get the index of this Task in the SideQuest and TaskList (should match)
+        ConstraintLayout taskConstraintLayout = (ConstraintLayout) view.getParent();
+        LinearLayout taskLayout = (LinearLayout) taskConstraintLayout.getParent();
+        LinearLayout taskList = (LinearLayout) taskLayout.getParent();
+        int taskIndex = taskList.indexOfChild(taskLayout);
+
+        // get the index of the SideQuest this Task belongs to
+        ConstraintLayout sideQuestConstraint = (ConstraintLayout) taskList.getParent();
+        LinearLayout sideQuestLinearLayout = (LinearLayout) sideQuestConstraint.getParent();
+        LinearLayout questListLinearLayout = (LinearLayout) sideQuestLinearLayout.getParent();
+        int questIndex = questListLinearLayout.indexOfChild(sideQuestLinearLayout);
+
+        // Get the state of the checkbox
+        // TODO: Make this better
+        CheckBox taskCheckBox = ((View) view.getParent()).findViewById(R.id.taskCheckBox);
+        boolean status = taskCheckBox.isChecked();
+
+        // Debug
+        Log.d("Home", "Attempting to complete task index " + taskIndex + " of SideQuest index " + questIndex);
+
+        // set the Task's status in the backend
+        QuestList questList = user.getQuestList();
+        SideQuest sideQuest = questList.getQuest(questIndex);
+        sideQuest.completeTasks(taskIndex);
+
+        // check if all tasks are complete
+        if (sideQuest.isComplete()) {
+            render();
+        }
     }
 
 }
