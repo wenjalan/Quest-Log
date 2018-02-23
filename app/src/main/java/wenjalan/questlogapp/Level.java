@@ -105,6 +105,11 @@ public class Level {
     // returns the required exp for the next level
     public int getExpToNextLevel() { return this.nextLevelExperience; }
 
+    // returns the progress towards the next level as a percent
+    public int getLevelProgress() {
+        return (int) ((double) this.userExperience / (double) this.nextLevelExperience * 100);
+    }
+
     // returns the owner of this Level
     public User getOwner() {
         return this.user;

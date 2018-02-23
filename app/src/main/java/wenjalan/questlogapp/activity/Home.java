@@ -95,6 +95,7 @@ public class Home extends AppCompatActivity {
         // get a reference to the User's Level
         Level userLevel = user.getLevel();
         // get the user's current progress towards their next level
+        // TODO: Use Level.getLevelProgress instead
         int progress = (int) ((double) userLevel.getExp() / (double) userLevel.getExpToNextLevel() * 100);
         // update the progress
         expBar.setProgress(progress);

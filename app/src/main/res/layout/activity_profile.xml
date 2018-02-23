@@ -173,6 +173,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Add Point"
+        android:onClick="addPointPhysical"
         app:layout_constraintBaseline_toBaselineOf="@+id/profileMentalAddPoint"
         app:layout_constraintEnd_toStartOf="@+id/profileMentalAddPoint"
         app:layout_constraintStart_toStartOf="parent" />
@@ -185,6 +186,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Add Point"
+        android:onClick="addPointMental"
         app:layout_constraintEnd_toEndOf="@+id/profilePerksLinearLayout"
         app:layout_constraintStart_toStartOf="@+id/profilePerksLinearLayout"
         app:layout_constraintTop_toBottomOf="@+id/profilePointsLinearLayout" />
@@ -196,6 +198,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Add Point"
+        android:onClick="addPointSocial"
         app:layout_constraintBaseline_toBaselineOf="@+id/profileMentalAddPoint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profileMentalAddPoint" />

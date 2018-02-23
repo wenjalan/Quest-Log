@@ -78,4 +78,11 @@ public class PerkTable {
         return this.perks.get(perk);
     }
 
+    // returns the bonus percent granted by a given Perk
+    public int getBonusPercent(String perk) {
+        double points = this.perks.get(perk);
+        int percent = (int) ((points * QuestLog.PERK_BONUS_MULTIPLIER) * 100);
+        return percent;
+    }
+
 }

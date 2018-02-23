@@ -36,11 +36,22 @@ public class QuestLog {
     private void start() {
         Log.d("QuestLogApp", "*** Setup complete, running start() method ***");
 
-//        // get references to the User's things
-//        QuestList quests = user.getQuestList();
-//        PerkTable perks = user.getPerkTable();
-//        Level level = user.getLevel();
-//
+        // get references to the User's things
+        QuestList quests = user.getQuestList();
+        PerkTable perks = user.getPerkTable();
+        Level level = user.getLevel();
+
+        // add 6 unused points
+        perks.addUnusedPoints(6);
+
+//        // spend points
+//        perks.addPoints(PerkTable.Perks.PHYSICAL, 3);
+//        perks.addPoints(PerkTable.Perks.MENTAL, 2);
+//        perks.addPoints(PerkTable.Perks.SOCIAL, 1);
+
+        // give some exp
+        level.addExp(80, null);
+
 //        // create a new quest to test
 //        SideQuest quest = new SideQuest(
 //                quests,
