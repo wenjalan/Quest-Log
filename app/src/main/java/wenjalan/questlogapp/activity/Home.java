@@ -190,6 +190,8 @@ public class Home extends AppCompatActivity {
     // called when the user taps the userProfileButton
     public void loadProfile(View view) {
         Log.d("Home", "User tapped userProfileButton");
+        Intent i = new Intent(this, Profile.class);
+        startActivity(i);
     }
 
 }
