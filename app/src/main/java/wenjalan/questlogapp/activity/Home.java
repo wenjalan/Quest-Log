@@ -26,7 +26,6 @@ import wenjalan.questlogapp.User;
 public class Home extends AppCompatActivity {
 
 // Fields //
-    // TODO: Make it a Parcelable instead of a global?
     public static QuestLog questLog;
 
 // References //
@@ -155,57 +154,83 @@ public class Home extends AppCompatActivity {
         LinearLayout questList = findViewById(R.id.questListLinearLayout);
         // get an inflater
         LayoutInflater inflater = getLayoutInflater();
-
         // create a new View to hold the SideQuest in
         View questView = inflater.inflate(R.layout.fragment_sidequest, questList, false);
-
         // add the view
         questList.addView(questView);
 
-        // edit the quest's fields to match those in the user's QuestList
         // title
-        TextView title = questView.findViewById(R.id.sideQuestTitle);
-        title.setText(sideQuest.getName());
+        displayQuestTitle(questView, sideQuest.getName());
 
         // description
-        TextView desc = questView.findViewById(R.id.sideQuestDesc);
-        desc.setText(sideQuest.getDescription());
+        displayQuestDesc(questView, sideQuest.getDescription());
 
         // perk
+        displayQuestPerk(questView, sideQuest.getPerkCategory());
+
+        // EXP reward
+        displayQuestReward(questView, sideQuest.getExpReward());
+
+        // tasks
+        displayQuestTasks(questView, inflater, sideQuest);
+
+    }
+
+    // displays the title of a Quest
+    private void displayQuestTitle(View questView, String questTitle) {
+        TextView title = questView.findViewById(R.id.sideQuestTitle);
+        title.setText(questTitle);
+    }
+
+    // displays the description of a Quest
+    private void displayQuestDesc(View questView, String questDesc) {
+        TextView desc = questView.findViewById(R.id.sideQuestDesc);
+        desc.setText(questDesc);
+    }
+
+    // displays the perk of a Quest
+    private void displayQuestPerk(View questView, String questPerk) {
         TextView perk = questView.findViewById(R.id.sideQuestPerk);
-        String questPerk = sideQuest.getPerkCategory();
         if (questPerk != null) {
             perk.setText(questPerk);
         }
         else {
             perk.setText("");
         }
+    }
 
-        // EXP reward
+    // displays the EXP reward of a Quest
+    private void displayQuestReward(View questView, int questReward) {
         TextView expText = questView.findViewById(R.id.sideQuestEXP);
-        expText.setText("" + sideQuest.getExpReward() + " EXP"); // have to explicitly convert it to String
+        expText.setText("" + questReward + " EXP"); // have to explicitly convert it to String
+    }
 
-        // tasks
+    // displays the tasks of a Quest
+    private void displayQuestTasks(View questView, LayoutInflater inflater, SideQuest quest) {
         // get the task list Linear Layout
         LinearLayout taskList = questView.findViewById(R.id.sideQuestTaskList);
         // add the tasks
-        for (int i = 0; i < sideQuest.tasks(); i++) {
+        for (int i = 0; i < quest.tasks(); i++) {
             // get the current task
-            Task task = sideQuest.getTask(i);
-            // inflate a view
-            View taskView = inflater.inflate(R.layout.fragment_task, taskList, false);
-
-            // add the task
-            taskList.addView(taskView);
-            // edit the task's desc
-            TextView taskDesc = taskView.findViewById(R.id.taskDesc);
-            taskDesc.setText(task.getDescription());
+            Task task = quest.getTask(i);
+            // display the task
+            displayTask(taskList, inflater, task);
         }
+    }
 
+    // displays a Task inside a SideQuest view, used only by displayQuestTasks
+    private void displayTask(LinearLayout taskList, LayoutInflater inflater, Task t) {
+        // inflate a view
+        View taskView = inflater.inflate(R.layout.fragment_task, taskList, false);
+        // add the task
+        taskList.addView(taskView);
+        // edit the task's desc
+        TextView taskDesc = taskView.findViewById(R.id.taskDesc);
+        taskDesc.setText(t.getDescription());
     }
 
 
-// Button Listeners //
+// Listeners //
     // called when the user taps the newQuestButton
     public void newQuest(View view) {
         Log.d("Home", "User tapped newQuestButton");

@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/QuestLogApp.iml" filepath="$PROJECT_DIR$/QuestLogApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Quest-Log.iml" filepath="$PROJECT_DIR$/Quest-Log.iml" />
+      <module fileurl="file://C:\AndroidStudio\Quest-Log\QuestLogApp.iml" filepath="C:\AndroidStudio\Quest-Log\QuestLogApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\AndroidStudio\Quest-Log\app\app.iml" filepath="C:\AndroidStudio\Quest-Log\app\app.iml" />
     </modules>
   </component>
 </project>
