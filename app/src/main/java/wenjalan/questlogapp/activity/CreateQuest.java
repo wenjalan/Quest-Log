@@ -23,11 +23,14 @@ import wenjalan.questlogapp.User;
 
 public class CreateQuest extends AppCompatActivity {
 
+// Constants //
     public static final int DEFAULT_TASK_FIELDS = 1;
 
+// Fields //
     private ArrayList<View> taskViews;
     private User user;
 
+// Methods //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,17 +39,26 @@ public class CreateQuest extends AppCompatActivity {
     }
 
     // starts the CreateQuest activity with some values
-    public void start() {
+    private void start() {
+        // debug
+        if (QuestLog.DEBUG) {
+            Log.d("CreateQuest", "Started CreateQuest activity");
+        }
         init();
+        render();
     }
 
     // initialization
-    public void init() {
+    private void init() {
         // get the user from the Home activity
         this.user = Home.questLog.getUser();
         // create a new array to store references to the task views
-        this.taskViews = new ArrayList<View>(2);
+        this.taskViews = new ArrayList<View>(DEFAULT_TASK_FIELDS);
+    }
 
+    // renders the activity
+    private void render() {
+        // create field views not already present
         createTaskFields();
         createPerkSpinner();
     }
@@ -68,16 +80,11 @@ public class CreateQuest extends AppCompatActivity {
         perkSpinner.setAdapter(adapter);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
 // Listeners //
     // called when the user taps the Add Task button
     public void addTaskView(View view) {
         addTaskView();
-    }
+    } // to catch the button
     public void addTaskView() {
         // Get the LinearLayout and Inflater and inflate a view
         LinearLayout taskList = findViewById(R.id.questTasksLinearLayout);
@@ -89,6 +96,11 @@ public class CreateQuest extends AppCompatActivity {
 
         // display the recent most view in taskViews
         taskList.addView(taskViews.get(taskViews.size() - 1));
+
+        // debug
+        if (QuestLog.DEBUG) {
+            Log.d("CreateQuest", "Added an additional task field");
+        }
     }
 
     // called when the user taps a Delete Button on a Task Field
@@ -99,6 +111,11 @@ public class CreateQuest extends AppCompatActivity {
         View field = (View) view.getParent().getParent();
         // Delete the parent of the button that called
         tasksList.removeView(field);
+
+        // debug
+        if (QuestLog.DEBUG) {
+            Log.d("CreateQuest", "Destroyed a task field");
+        }
     }
 
     // called when the user taps the Create Quest button
@@ -147,6 +164,10 @@ public class CreateQuest extends AppCompatActivity {
         user.getQuestList().addQuest(quest);
 
         // close this activity
+        // debug
+        if (QuestLog.DEBUG) {
+            Log.d("CreateQuest", "Quest creation complete, closing CreateQuest");
+        }
         finish();
     }
 
@@ -185,6 +206,12 @@ public class CreateQuest extends AppCompatActivity {
             // add the new Task to the ArrayList
             tasks.add(t);
         }
+
+        // debug
+        if (QuestLog.DEBUG) {
+            Log.d("CreateQuest", "Successfully created Task array from Task views");
+        }
+
         return tasks.toArray(new Task[tasks.size()]);
     }
 

@@ -2,19 +2,23 @@ package wenjalan.questlogapp.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import wenjalan.questlogapp.Level;
 import wenjalan.questlogapp.PerkTable;
+import wenjalan.questlogapp.QuestLog;
 import wenjalan.questlogapp.R;
 import wenjalan.questlogapp.User;
 
 public class Profile extends AppCompatActivity {
 
+// Fields //
     private User user;
 
+// Methods //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +28,10 @@ public class Profile extends AppCompatActivity {
 
     // runs upon startup
     private void start() {
+        // debug
+        if (QuestLog.DEBUG) {
+            Log.d("Profile", "Started Profile activity");
+        }
         init();
         render();
     }

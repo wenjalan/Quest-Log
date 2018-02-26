@@ -29,7 +29,7 @@ public class SideQuest implements Completable {
 
         // Log for debugging purposes
         if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Created new SideQuest " + this.name);
+            Log.d("QuestLogApp", "Successfully created new SideQuest " + this.name);
         }
     }
 
@@ -43,7 +43,7 @@ public class SideQuest implements Completable {
 
         // Log for debugging purposes
         if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Created new SideQuest " + this.name);
+            Log.d("QuestLogApp", "Successfully created new SideQuest " + this.name);
         }
     }
 
@@ -58,7 +58,7 @@ public class SideQuest implements Completable {
 
         // Log for debugging purposes
         if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Created new SideQuest " + this.name);
+            Log.d("QuestLogApp", "Successfully created new SideQuest " + this.name);
         }
     }
 

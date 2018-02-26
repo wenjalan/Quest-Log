@@ -53,6 +53,10 @@ public class Home extends AppCompatActivity {
 
     // runs on startup
     public void start() {
+        // debug
+        if (QuestLog.DEBUG) {
+            Log.d("Home", "Started Home activity");
+        }
         init();
         render();
     }
@@ -156,7 +160,7 @@ public class Home extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         // create a new View to hold the SideQuest in
         View questView = inflater.inflate(R.layout.fragment_sidequest, questList, false);
-        // add the view
+        // add the view to the list
         questList.addView(questView);
 
         // title
@@ -233,14 +237,12 @@ public class Home extends AppCompatActivity {
 // Listeners //
     // called when the user taps the newQuestButton
     public void newQuest(View view) {
-        Log.d("Home", "User tapped newQuestButton");
         Intent i = new Intent(this, CreateQuest.class);
         startActivity(i);
     }
 
     // called when the user taps the userProfileButton
     public void loadProfile(View view) {
-        Log.d("Home", "User tapped userProfileButton");
         Intent i = new Intent(this, Profile.class);
         startActivity(i);
     }
