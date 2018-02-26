@@ -74,17 +74,23 @@ public class Profile extends AppCompatActivity {
 
     // refreshes the user's Level aspects, the level text and the bar
     private void refreshLevel() {
+        // Level reference
+        Level level = user.getLevel();
+
         // TextView field
         TextView levelTextView = findViewById(R.id.profileUserLevel);
         int userLevel = user.getLevel().getLevel();
         levelTextView.setText("Level " + userLevel);
 
+        // EXP Text
+        TextView expText = findViewById(R.id.profileExpText);
+        int cExp = level.getExp();
+        int lExp = level.getExpToNextLevel();
+        expText.setText("" + cExp + "/" + lExp);
+
         // EXP Bar
         ProgressBar expBar = findViewById(R.id.profileUserExpBar);
-        // TODO: Make this a get() method in Level
-        Level level = user.getLevel();
         int progress = level.getLevelProgress();
-
         expBar.setProgress(progress);
     }
 

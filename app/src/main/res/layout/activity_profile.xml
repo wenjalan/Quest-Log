@@ -65,8 +65,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/profileUserLevel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/profileExpText"
         app:layout_constraintStart_toEndOf="@+id/profileUserLevel"
         app:layout_constraintTop_toTopOf="@+id/profileUserLevel" />
 
@@ -202,5 +201,16 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/profileMentalAddPoint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profileMentalAddPoint" />
+
+    <TextView
+        android:id="@+id/profileExpText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="0/0"
+        android:textAlignment="textEnd"
+        app:layout_constraintBottom_toBottomOf="@+id/profileUserExpBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profileUserExpBar" />
 
 </android.support.constraint.ConstraintLayout>
