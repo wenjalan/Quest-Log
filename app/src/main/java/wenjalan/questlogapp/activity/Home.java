@@ -49,6 +49,10 @@ public class Home extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         save();
+        // debug
+        if (QuestLog.DEBUG) {
+            Log.d("Home", "Closed Home activity");
+        }
     }
 
     // runs on startup

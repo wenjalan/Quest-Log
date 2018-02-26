@@ -38,6 +38,21 @@ public class CreateQuest extends AppCompatActivity {
         start();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        render();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // debug
+        if (QuestLog.DEBUG) {
+            Log.d("CreateQuest", "Closed CreateQuest activity");
+        }
+    }
+
     // starts the CreateQuest activity with some values
     private void start() {
         // debug

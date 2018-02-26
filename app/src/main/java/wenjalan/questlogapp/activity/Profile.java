@@ -26,6 +26,21 @@ public class Profile extends AppCompatActivity {
         start();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        render();
+        // debug
+        if (QuestLog.DEBUG) {
+            Log.d("Profile", "Closed Profile activity");
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     // runs upon startup
     private void start() {
         // debug
