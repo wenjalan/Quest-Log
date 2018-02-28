@@ -2,7 +2,9 @@ package wenjalan.questlogapp;
 
 import android.util.Log;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
 // Fields //
     private String name;

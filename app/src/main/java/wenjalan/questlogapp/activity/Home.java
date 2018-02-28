@@ -14,6 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import wenjalan.questlogapp.Level;
 import wenjalan.questlogapp.PerkTable;
 import wenjalan.questlogapp.QuestList;
@@ -31,54 +36,102 @@ public class Home extends AppCompatActivity {
 // References //
     public User user;
 
-// Methods //
+// Events //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         start();
+        Log.d("Home", "Created activity Home");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        save();
+        Log.d("Home", "Paused activity Home");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        // load();
         render();
+        Log.d("Home", "Resumed activity Home");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        save();
-        // debug
-        if (QuestLog.DEBUG) {
-            Log.d("Home", "Closed Home activity");
-        }
+        Log.d("Home", "Destroyed activity Home");
     }
 
+// Methods //
     // runs on startup
     public void start() {
-        // debug
-        if (QuestLog.DEBUG) {
-            Log.d("Home", "Started Home activity");
-        }
         init();
         render();
     }
 
     // initialization
     private void init() {
-        // TODO: Load saved data
-        if (QuestLog.CLEAN_BOOT) {
-            // create a new instance of QuestLog
-            Home.questLog = new QuestLog("Alan Wen");
-        }
-        else {
-            // load QuestLog from storage
-            load();
-        }
-
+        // load saved data
+        load();
         // get references from the questLog
         this.user = Home.questLog.getUser();
+    }
+
+    // saves app data to storage
+    private void save() {
+        FileOutputStream outputStream;
+        ObjectOutputStream objectOutputStream;
+
+        // output the QuestLog to storage
+        try {
+            // initialize
+            outputStream = openFileOutput(QuestLog.DATA_FILE_NAME, Context.MODE_PRIVATE);
+            objectOutputStream = new ObjectOutputStream(outputStream);
+
+            // write the QuestLog to the data file
+            objectOutputStream.writeObject(this.questLog);
+
+            // close the streams
+            objectOutputStream.close();
+            outputStream.close();
+
+            // log
+            Log.d("Home", "Saved QuestLog to storage");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("Home", "Failed to save QuestLog to storage");
+        }
+    }
+
+    // loads app data from storage
+    private void load() {
+        FileInputStream fileInputStream;
+        ObjectInputStream objectInputStream;
+
+        // load the QuestLog from storage
+        try {
+            // initialize
+            fileInputStream = openFileInput(QuestLog.DATA_FILE_NAME);
+            objectInputStream = new ObjectInputStream(fileInputStream);
+
+            // read the QuestLog from storage
+            this.questLog = (QuestLog) objectInputStream.readObject();
+
+            // close
+            objectInputStream.close();
+            fileInputStream.close();
+
+            // log
+            Log.d("Home", "Loaded QuestLog from storage");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("Home", "Failed to load QuestLog from storage, creating new instance...");
+            this.questLog = new QuestLog("Alan Wen");
+        }
     }
 
     // modifies on-screen content to match internal states
@@ -87,16 +140,6 @@ public class Home extends AppCompatActivity {
         updateUserInfobar();
         // update the list of quests
         updateQuestList();
-    }
-
-    // loads the user's QuestLog from storage
-    private void load() {
-        // TODO: load data
-    }
-
-    // saves the user's QuestLog to storage
-    private void save() {
-        // TODO: Save data
     }
 
     // updates the userInfoBar in the layout
@@ -124,15 +167,9 @@ public class Home extends AppCompatActivity {
         // get a reference to the User's Level
         Level userLevel = user.getLevel();
         // get the user's current progress towards their next level
-        // TODO: Use Level.getLevelProgress instead
-        int progress = (int) ((double) userLevel.getExp() / (double) userLevel.getExpToNextLevel() * 100);
+        int progress = this.user.getLevel().getLevelProgress();
         // update the progress
         expBar.setProgress(progress);
-
-        // debug
-        if (QuestLog.DEBUG) {
-            Log.d("Home", "Set EXP bar progress to " + progress + " percent");
-        }
     }
 
     // updates the questListLinearLayout with all SideQuest instances

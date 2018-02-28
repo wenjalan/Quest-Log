@@ -3,7 +3,9 @@ package wenjalan.questlogapp;
 
 import android.util.Log;
 
-public class Task implements Completable {
+import java.io.Serializable;
+
+public class Task implements Completable, Serializable {
 
 // Fields //
     private String description;

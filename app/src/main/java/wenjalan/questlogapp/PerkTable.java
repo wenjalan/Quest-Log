@@ -3,9 +3,10 @@ package wenjalan.questlogapp;
 
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class PerkTable {
+public class PerkTable implements Serializable {
 
 // References //
     private User user;

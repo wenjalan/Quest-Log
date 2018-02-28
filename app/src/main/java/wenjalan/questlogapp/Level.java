@@ -3,7 +3,9 @@ package wenjalan.questlogapp;
 
 import android.util.Log;
 
-public class Level {
+import java.io.Serializable;
+
+public class Level implements Serializable {
 
 // References //
     private User user;

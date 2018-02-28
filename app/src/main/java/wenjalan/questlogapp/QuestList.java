@@ -3,9 +3,10 @@ package wenjalan.questlogapp;
 
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class QuestList {
+public class QuestList implements Serializable {
 
 // References //
     private User user;

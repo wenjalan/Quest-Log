@@ -3,9 +3,10 @@ package wenjalan.questlogapp;
 
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SideQuest implements Completable {
+public class SideQuest implements Completable, Serializable {
 
 // References
     private QuestList questList;

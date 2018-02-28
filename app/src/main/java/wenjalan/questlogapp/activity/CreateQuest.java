@@ -30,12 +30,17 @@ public class CreateQuest extends AppCompatActivity {
     private ArrayList<View> taskViews;
     private User user;
 
-// Methods //
+// Events //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quest);
         start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     @Override
@@ -53,6 +58,7 @@ public class CreateQuest extends AppCompatActivity {
         }
     }
 
+// Methods //
     // starts the CreateQuest activity with some values
     private void start() {
         // debug

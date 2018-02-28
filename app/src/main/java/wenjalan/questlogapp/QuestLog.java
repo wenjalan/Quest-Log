@@ -4,13 +4,16 @@ package wenjalan.questlogapp;
 
 import android.util.Log;
 
-public class QuestLog {
+import java.io.Serializable;
+
+public class QuestLog implements Serializable {
 // App Constants  //
     public static final boolean DEBUG = true;   // sets the app to debug mode
-    public static final boolean CLEAN_BOOT = true;
+    public static final boolean CLEAN_BOOT = false;
     public static final double PERK_BONUS_MULTIPLIER = 0.05; // percent bonus per perk point
     public static final double NEXT_LEVEL_EXP_MULTIPLIER = 1.20; // how much the exp requirement for a level goes up by each level
     public static final int PERK_POINTS_PER_LEVEL = 1;  // how many perk points to give the user per level up
+    public static final String DATA_FILE_NAME = "QuestLog.dat";
 
 // Fields //
     private User user;
@@ -22,17 +25,11 @@ public class QuestLog {
 
         // if in debug mode, start test method
         if (QuestLog.DEBUG) {
-            start();
+            // start();
         }
     }
 
 // Methods //
-    // loads data from a stored QuestLog app
-    public void loadFrom() {
-        // TODO: Actually make it load something
-        return;
-    }
-
     // debugging method, ran if app is set to DEBUG mode
     private void start() {
         Log.d("QuestLogApp", "*** Setup complete, running start() method ***");
