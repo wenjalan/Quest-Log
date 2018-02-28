@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -36,35 +37,30 @@ public class CreateQuest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quest);
         start();
+        Log.d("CreateQuest", "CREATED activity CreateQuest");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d("CreateQuest", "PAUSED activity CreateQuest");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        render();
+        Log.d("CreateQuest", "RESUMED activity CreateQuest");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // debug
-        if (QuestLog.DEBUG) {
-            Log.d("CreateQuest", "Closed CreateQuest activity");
-        }
+        Log.d("CreateQuest", "DESTROYED activity CreateQuest");
     }
 
 // Methods //
     // starts the CreateQuest activity with some values
     private void start() {
-        // debug
-        if (QuestLog.DEBUG) {
-            Log.d("CreateQuest", "Started CreateQuest activity");
-        }
         init();
         render();
     }
@@ -118,10 +114,8 @@ public class CreateQuest extends AppCompatActivity {
         // display the recent most view in taskViews
         taskList.addView(taskViews.get(taskViews.size() - 1));
 
-        // debug
-        if (QuestLog.DEBUG) {
-            Log.d("CreateQuest", "Added an additional task field");
-        }
+        // log
+        Log.d("CreateQuest", "Added a Task field");
     }
 
     // called when the user taps a Delete Button on a Task Field
@@ -130,23 +124,18 @@ public class CreateQuest extends AppCompatActivity {
         ViewGroup tasksList = (ViewGroup) findViewById(R.id.questTasksLinearLayout);
         // Grab the entire task field the button's from
         View field = (View) view.getParent().getParent();
+        // Remove the field from the taskViews list
+        taskViews.remove(field);
         // Delete the parent of the button that called
         tasksList.removeView(field);
 
-        // debug
-        if (QuestLog.DEBUG) {
-            Log.d("CreateQuest", "Destroyed a task field");
-        }
+        // log
+        Log.d("CreateQuest", "Removed a Task field");
     }
 
     // called when the user taps the Create Quest button
     // TODO: Check if the fields are valid before crashing
     public void createQuest(View view) {
-        // debug
-        if (QuestLog.DEBUG) {
-            Log.d("CreateQuest", "Creating new SideQuest...");
-        }
-
         // grab references to all the fields
         EditText titleField = findViewById(R.id.questTitleField);
         EditText descField = findViewById(R.id.questDescField);
@@ -186,9 +175,7 @@ public class CreateQuest extends AppCompatActivity {
 
         // close this activity
         // debug
-        if (QuestLog.DEBUG) {
-            Log.d("CreateQuest", "Quest creation complete, closing CreateQuest");
-        }
+        Log.d("CreateQuest", "SideQuest" + quest.getName() + " created, closing activity...");
         finish();
     }
 
@@ -226,11 +213,6 @@ public class CreateQuest extends AppCompatActivity {
             Task t = new Task(desc);
             // add the new Task to the ArrayList
             tasks.add(t);
-        }
-
-        // debug
-        if (QuestLog.DEBUG) {
-            Log.d("CreateQuest", "Successfully created Task array from Task views");
         }
 
         return tasks.toArray(new Task[tasks.size()]);

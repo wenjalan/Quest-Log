@@ -42,14 +42,14 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         start();
-        Log.d("Home", "Created activity Home");
+        Log.d("Home", "CREATED activity Home");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         save();
-        Log.d("Home", "Paused activity Home");
+        Log.d("Home", "PAUSED activity Home");
     }
 
     @Override
@@ -57,13 +57,13 @@ public class Home extends AppCompatActivity {
         super.onResume();
         // load();
         render();
-        Log.d("Home", "Resumed activity Home");
+        Log.d("Home", "RESUMED activity Home");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("Home", "Destroyed activity Home");
+        Log.d("Home", "DESTROYED activity Home");
     }
 
 // Methods //
@@ -307,9 +307,6 @@ public class Home extends AppCompatActivity {
         // TODO: Make this better
         CheckBox taskCheckBox = ((View) view.getParent()).findViewById(R.id.taskCheckBox);
         boolean status = taskCheckBox.isChecked();
-
-        // Debug
-        Log.d("Home", "Attempting to complete task index " + taskIndex + " of SideQuest index " + questIndex);
 
         // set the Task's status in the backend
         QuestList questList = user.getQuestList();
