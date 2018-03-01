@@ -1,7 +1,11 @@
 package wenjalan.questlogapp.activity;
 // Activity used to display the user's stats and perks
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +13,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
@@ -172,10 +177,31 @@ public class Profile extends AppCompatActivity {
     }
 
     // adds a point to a perk
-    public void addPoint(String perk) {
+    private void addPoint(String perk) {
         PerkTable perks = user.getPerkTable();
         perks.addPoints(perk, 1);
         refreshPerks();
+    }
+
+    // deletes all user data
+    public void deleteUserData(View view) {
+        // Get the file and delete it
+        File data = new File(Environment.getRootDirectory(), QuestLog.DATA_FILE_NAME);
+        data.delete();
+        Log.d("QuestLog.Android", "Deleted user data");
+        // restart the app
+        restart();
+    }
+
+    // restarts the app
+    private void restart() {
+        Log.d("QuestLog.Android", "Restarting application...");
+        Intent i = new Intent(this, Home.class);
+        int id = 252525;
+        PendingIntent p = PendingIntent.getActivity(this, id, i, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 100, p);
+        System.exit(0);
     }
 
 }
