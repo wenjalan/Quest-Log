@@ -345,4 +345,17 @@ public class Home extends AppCompatActivity {
         return questListLinearLayout.indexOfChild(sideQuestLinearLayout);
     }
 
+    // called when the user wants to edit a SideQuest
+    public void editQuest(View button) {
+        int questIndex = getQuestIndexFromEditButton(button);
+    }
+
+    // returns the index of the Quest that an Edit button is attached to
+    private int getQuestIndexFromEditButton(View view) {
+        ConstraintLayout sideQuestConstraintLayout = (ConstraintLayout) view.getParent();
+        LinearLayout sideQuestLinearLayout = (LinearLayout) sideQuestConstraintLayout.getParent();
+        LinearLayout questListLinearLayout = (LinearLayout) sideQuestLinearLayout.getParent();
+        return questListLinearLayout.indexOfChild(sideQuestLinearLayout);
+    }
+
 }
