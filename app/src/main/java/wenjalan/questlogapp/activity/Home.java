@@ -130,7 +130,7 @@ public class Home extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
             Log.d("Home", "Failed to load QuestLog from storage, creating new instance...");
-            this.questLog = new QuestLog("Alan Wen");
+            this.questLog = new QuestLog("AlphaUser");
         }
     }
 
