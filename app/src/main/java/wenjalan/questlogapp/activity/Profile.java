@@ -27,30 +27,30 @@ public class Profile extends AppCompatActivity {
 // Android Events //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("QuestLog.Android", "CREATED activity Profile");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         start();
-        Log.d("QuestLog.Android", "CREATED activity Profile");
     }
 
     @Override
     protected void onPause() {
+        Log.d("QuestLog.Android", "PAUSED activity Profile");
         super.onPause();
         save();
-        Log.d("QuestLog.Android", "PAUSED activity Profile");
     }
 
     @Override
     protected void onResume() {
+        Log.d("QuestLog.Android", "RESUMED activity Profile");
         super.onResume();
         render();
-        Log.d("QuestLog.Android", "RESUMED activity Profile");
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         Log.d("QuestLog.Android", "DESTROYED activity Profile");
+        super.onDestroy();
     }
 
 // Methods //

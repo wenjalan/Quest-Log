@@ -41,31 +41,31 @@ public class Home extends AppCompatActivity {
 // Android Events //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("QuestLog.Android", "CREATED activity Home");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         start();
-        Log.d("QuestLog.Android", "CREATED activity Home");
     }
 
     @Override
     protected void onPause() {
+        Log.d("QuestLog.Android", "PAUSED activity Home");
         super.onPause();
         save();
-        Log.d("QuestLog.Android", "PAUSED activity Home");
     }
 
     @Override
     protected void onResume() {
+        Log.d("QuestLog.Android", "RESUMED activity Home");
         super.onResume();
         // load();
         render();
-        Log.d("QuestLog.Android", "RESUMED activity Home");
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         Log.d("QuestLog.Android", "DESTROYED activity Home");
+        super.onDestroy();
     }
 
 // Methods //

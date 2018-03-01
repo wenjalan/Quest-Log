@@ -42,29 +42,29 @@ public class CreateQuest extends AppCompatActivity {
 // Android Events //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("QuestLog.Android", "CREATED activity CreateQuest");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quest);
         start();
-        Log.d("QuestLog.Android", "CREATED activity CreateQuest");
     }
 
     @Override
     protected void onPause() {
+        Log.d("QuestLog.Android", "PAUSED activity CreateQuest");
         super.onPause();
         save();
-        Log.d("QuestLog.Android", "PAUSED activity CreateQuest");
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
         Log.d("QuestLog.Android", "RESUMED activity CreateQuest");
+        super.onResume();
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         Log.d("QuestLog.Android", "DESTROYED activity CreateQuest");
+        super.onDestroy();
     }
 
 // Methods //

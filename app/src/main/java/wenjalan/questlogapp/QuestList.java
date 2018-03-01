@@ -56,6 +56,7 @@ public class QuestList implements Serializable {
     // replaces a SideQuest at a given index with another SideQuest
     public void replaceQuest(int index, SideQuest quest) {
         questList.set(index, quest);
+        Log.d("QuestLog.System", "Replaced SideQuest at index " + index + " with SideQuest " + quest.getName() + " in " + user.getName() + "'s QuestList");
     }
 
     // removes a SideQuest given a SideQuest
