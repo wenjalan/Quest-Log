@@ -1,5 +1,6 @@
 package wenjalan.questlogapp.activity;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.zip.Inflater;
 
@@ -29,9 +32,10 @@ public class CreateQuest extends AppCompatActivity {
 
 // Fields //
     private ArrayList<View> taskViews;
+    private QuestLog questLog;
     private User user;
 
-// Events //
+// Android Events //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,7 @@ public class CreateQuest extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        save();
         Log.d("CreateQuest", "PAUSED activity CreateQuest");
     }
 
@@ -67,10 +72,36 @@ public class CreateQuest extends AppCompatActivity {
 
     // initialization
     private void init() {
-        // get the user from the Home activity
-        this.user = Home.questLog.getUser();
-        // create a new array to store references to the task views
+        this.questLog = Home.questLog;
+        this.user = questLog.getUser();
         this.taskViews = new ArrayList<View>(DEFAULT_TASK_FIELDS);
+    }
+
+    // saves app data to storage
+    // WARNING: Copy-pasted from Home
+    private void save() {
+        FileOutputStream outputStream;
+        ObjectOutputStream objectOutputStream;
+
+        // output the QuestLog to storage
+        try {
+            // initialize
+            outputStream = openFileOutput(QuestLog.DATA_FILE_NAME, Context.MODE_PRIVATE);
+            objectOutputStream = new ObjectOutputStream(outputStream);
+
+            // write the QuestLog to the data file
+            objectOutputStream.writeObject(this.questLog);
+
+            // close the streams
+            objectOutputStream.close();
+            outputStream.close();
+
+            // log
+            Log.d("CreateQuest", "Saved QuestLog to storage");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("CreateQuest", "Failed to save QuestLog to storage");
+        }
     }
 
     // renders the activity

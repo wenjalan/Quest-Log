@@ -36,7 +36,7 @@ public class Home extends AppCompatActivity {
 // References //
     public User user;
 
-// Events //
+// Android Events //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -290,33 +290,54 @@ public class Home extends AppCompatActivity {
 
     // called when the User completes a Task
     public void toggleTaskStatus(View view) {
-        // TODO: Make this less bad
+        // Get the state of the checkbox
+        boolean state = ((CheckBox) view).isChecked();
+
+        // get the indexes of the Task and SideQuest
+        int taskIndex = getTaskIndex(view);
+        int questIndex = getQuestIndex(view);
+
+        // get a reference to the SideQuest
+        QuestList questList = user.getQuestList();
+        SideQuest sideQuest = questList.getQuest(questIndex);
+
+        // set the Task's status in the backend
+        if (state) {
+            // complete the Task
+            sideQuest.completeTasks(taskIndex);
+        }
+        else {
+            // un-complete the Task
+            sideQuest.uncompleteTasks(taskIndex);
+        }
+
+        // refresh homepage if SideQuest complete
+        if (sideQuest.isComplete()) {
+            render();
+        }
+    }
+
+    // returns the Task index of a Task given its checkbox
+    // TODO: Make it less messy
+    private int getTaskIndex(View view) {
         // get the index of this Task in the SideQuest and TaskList (should match)
         ConstraintLayout taskConstraintLayout = (ConstraintLayout) view.getParent();
         LinearLayout taskLayout = (LinearLayout) taskConstraintLayout.getParent();
         LinearLayout taskList = (LinearLayout) taskLayout.getParent();
-        int taskIndex = taskList.indexOfChild(taskLayout);
+        return taskList.indexOfChild(taskLayout);
+    }
 
-        // get the index of the SideQuest this Task belongs to
+    // returns the SideQuest index of a SideQuest given a checkbox of a SideQuest's task
+    // TODO: Make it less messy/redundant
+    private int getQuestIndex(View view) {
+        // return the SideQuest this view belongs to
+        ConstraintLayout taskConstraintLayout = (ConstraintLayout) view.getParent();
+        LinearLayout taskLayout = (LinearLayout) taskConstraintLayout.getParent();
+        LinearLayout taskList = (LinearLayout) taskLayout.getParent();
         ConstraintLayout sideQuestConstraint = (ConstraintLayout) taskList.getParent();
         LinearLayout sideQuestLinearLayout = (LinearLayout) sideQuestConstraint.getParent();
         LinearLayout questListLinearLayout = (LinearLayout) sideQuestLinearLayout.getParent();
-        int questIndex = questListLinearLayout.indexOfChild(sideQuestLinearLayout);
-
-        // Get the state of the checkbox
-        // TODO: Make this better
-        CheckBox taskCheckBox = ((View) view.getParent()).findViewById(R.id.taskCheckBox);
-        boolean status = taskCheckBox.isChecked();
-
-        // set the Task's status in the backend
-        QuestList questList = user.getQuestList();
-        SideQuest sideQuest = questList.getQuest(questIndex);
-        sideQuest.completeTasks(taskIndex);
-
-        // check if all tasks are complete
-        if (sideQuest.isComplete()) {
-            render();
-        }
+        return questListLinearLayout.indexOfChild(sideQuestLinearLayout);
     }
 
 }

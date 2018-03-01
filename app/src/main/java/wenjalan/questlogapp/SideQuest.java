@@ -116,6 +116,14 @@ public class SideQuest implements Completable, Serializable {
         }
     }
 
+    // uncompletes Task(s) of this SideQuest
+    public void uncompleteTasks(int... indexes) {
+        // uncomplete the Tasks requested
+        for (int i : indexes) {
+            tasks.get(i).uncomplete();
+        }
+    }
+
     // checks whether all Tasks in this SideQuest have been completed
     private boolean allTasksAreComplete() {
         // if the SideQuest has tasks, check

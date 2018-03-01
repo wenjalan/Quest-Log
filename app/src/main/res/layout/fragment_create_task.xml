@@ -20,7 +20,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="Task Description"
-            android:inputType="textPersonName"
+            android:inputType="textCapSentences"
             app:layout_constraintEnd_toStartOf="@+id/deleteTaskButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

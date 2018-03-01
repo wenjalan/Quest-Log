@@ -1,11 +1,15 @@
 package wenjalan.questlogapp.activity;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 import wenjalan.questlogapp.Level;
 import wenjalan.questlogapp.PerkTable;
@@ -16,45 +20,76 @@ import wenjalan.questlogapp.User;
 public class Profile extends AppCompatActivity {
 
 // Fields //
+    private QuestLog questLog;
     private User user;
 
-// Methods //
+// Android Events //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         start();
+        Log.d("Profile", "STARTED activity Profile");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        save();
+        Log.d("Profile", "PAUSED activity Profile");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         render();
-        // debug
-        if (QuestLog.DEBUG) {
-            Log.d("Profile", "Closed Profile activity");
-        }
+        Log.d("Profile", "RESUMED activity Profile");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.d("Profile", "DESTROYED activity Profile");
     }
 
+// Methods //
     // runs upon startup
     private void start() {
-        // debug
-        if (QuestLog.DEBUG) {
-            Log.d("Profile", "Started Profile activity");
-        }
         init();
         render();
     }
 
     // initialization
     private void init() {
-        // get a reference to the User
-        this.user = Home.questLog.getUser();
+        this.questLog = Home.questLog;
+        this.user = questLog.getUser();
+    }
+
+    // saves app data to storage
+    // WARNING: Copy-pasted from Home
+    private void save() {
+        FileOutputStream outputStream;
+        ObjectOutputStream objectOutputStream;
+
+        // output the QuestLog to storage
+        try {
+            // initialize
+            outputStream = openFileOutput(QuestLog.DATA_FILE_NAME, Context.MODE_PRIVATE);
+            objectOutputStream = new ObjectOutputStream(outputStream);
+
+            // write the QuestLog to the data file
+            objectOutputStream.writeObject(this.questLog);
+
+            // close the streams
+            objectOutputStream.close();
+            outputStream.close();
+
+            // log
+            Log.d("Profile", "Saved QuestLog to storage");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("Profile", "Failed to save QuestLog to storage");
+        }
     }
 
     // renders the activity with the required data
