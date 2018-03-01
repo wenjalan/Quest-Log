@@ -348,6 +348,9 @@ public class Home extends AppCompatActivity {
     // called when the user wants to edit a SideQuest
     public void editQuest(View button) {
         int questIndex = getQuestIndexFromEditButton(button);
+        Intent i = new Intent(this, CreateQuest.class);
+        i.putExtra("LoadQuestAtIndex", questIndex);
+        startActivity(i);
     }
 
     // returns the index of the Quest that an Edit button is attached to

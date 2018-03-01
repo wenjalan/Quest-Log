@@ -3,6 +3,7 @@ package wenjalan.questlogapp.activity;
 // Creates a new SideQuest given user-generated fields and returns to Home
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -111,6 +113,13 @@ public class CreateQuest extends AppCompatActivity {
         // create field views not already present
         createTaskFields();
         createPerkSpinner();
+
+        // check if we need to load a quest to edit
+        Intent i = this.getIntent();
+        int editQuestIndex = i.getIntExtra("LoadQuestAtIndex", -1);
+        if (editQuestIndex >= 0) {
+            loadQuest(editQuestIndex);
+        }
     }
 
     // creates empty task fields, references stored in taskViews[]
@@ -128,6 +137,61 @@ public class CreateQuest extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.perks_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         perkSpinner.setAdapter(adapter);
+    }
+
+    // loads a SideQuest into the fields
+    private void loadQuest(int index) {
+        // change the title of the activity to "Edit Quest"
+        TextView createQuestTitle = findViewById(R.id.createQuestTitle);
+        createQuestTitle.setText("Edit Quest");
+
+        // get the quest
+        SideQuest quest = this.user.getQuestList().getQuest(index);
+
+        // set the fields
+        // title
+        EditText titleField = (EditText) findViewById(R.id.questTitleField);
+        titleField.setText(quest.getName());
+
+        // description
+        EditText descField = (EditText) findViewById(R.id.questDescField);
+        descField.setText(quest.getDescription());
+
+        // exp
+        EditText expField = (EditText) findViewById(R.id.questExpField);
+        int expReward = quest.getExpReward();
+        expField.setText("" + expReward);
+
+        // perk
+        Spinner perkSpinner = (Spinner) findViewById(R.id.perkSpinner);
+        String perk = quest.getPerkCategory();
+
+        if (perk == null) {
+            perkSpinner.setSelection(0);
+        }
+        else if (perk.equals(PerkTable.Perks.PHYSICAL)) {
+            perkSpinner.setSelection(1);
+        }
+        else if (perk.equals(PerkTable.Perks.MENTAL)) {
+            perkSpinner.setSelection(2);
+        }
+        else if (perk.equals(PerkTable.Perks.SOCIAL)) {
+            perkSpinner.setSelection(3);
+        }
+
+        // tasks
+        Task[] tasks = quest.getTasks();
+        // add the first task because its view already exists
+        View taskView = (View) this.taskViews.get(0);
+        EditText taskDescField = (EditText) taskView.findViewById(R.id.createTaskDesc);
+        taskDescField.setText(tasks[0].getDescription());
+        for (int taskIndex = 1; taskIndex < tasks.length; taskIndex++) {
+            addTaskView();
+            taskView = (View) this.taskViews.get(taskIndex);
+            taskDescField = (EditText) taskView.findViewById(R.id.createTaskDesc);
+            taskDescField.setText(tasks[taskIndex].getDescription());
+        }
+        Log.d("QuestLog.Android", "Loaded SideQuest " + quest.getName() + " for editing");
     }
 
 // Listeners //
@@ -203,8 +267,17 @@ public class CreateQuest extends AppCompatActivity {
                 questTasks
         );
 
-        // add the SideQuest
-        user.getQuestList().addQuest(quest);
+        // if we were editing a quest
+        int editQuestIndex = getIntent().getIntExtra("LoadQuestAtIndex", -1);
+        // if the index was found to be a quest
+        if (editQuestIndex >= 0) {
+            // replace the SideQuest
+            user.getQuestList().replaceQuest(editQuestIndex, quest);
+        }
+        else {
+            // add the SideQuest
+            user.getQuestList().addQuest(quest);
+        }
 
         // close this activity
         // debug
@@ -247,7 +320,6 @@ public class CreateQuest extends AppCompatActivity {
             // add the new Task to the ArrayList
             tasks.add(t);
         }
-
         return tasks.toArray(new Task[tasks.size()]);
     }
 

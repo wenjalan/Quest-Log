@@ -137,6 +137,11 @@ public class SideQuest implements Completable, Serializable {
         return this.tasks.size();
     }
 
+    // returns an array of Tasks this SideQuest has (read-only)
+    public Task[] getTasks() {
+        return this.tasks.toArray(new Task[this.tasks.size()]);
+    }
+
     // returns the name of this SideQuest
     public String getName() {
         return this.name;
