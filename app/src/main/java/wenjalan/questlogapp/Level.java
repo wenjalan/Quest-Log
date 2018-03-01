@@ -24,11 +24,7 @@ public class Level implements Serializable {
         init();
         this.user = user;
         this.perks = perkTable;
-
-        // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Created new Level for User " + user.getName());
-        }
+        Log.d("QuestLog.System", "Created new Level for User " + user.getName());
     }
 
 // Methods //
@@ -69,11 +65,8 @@ public class Level implements Serializable {
             levelUps++;
         }
 
-        // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Granted user " + user.getName() + " " + exp + " EXP (BASE: " + sourceExp + ", BONUS: " + bonusExp + ")");
-            Log.d("QuestLogApp", "Leveled up " + levelUps + " times.");
-        }
+        Log.d("QuestLog.System", "Granted user " + user.getName() + " " + exp + " EXP (BASE: " + sourceExp + ", BONUS: " + bonusExp + ")");
+        Log.d("QuestLog.System", "Leveled up " + levelUps + " times.");
     }
 
     // returns the amount of exp from the perk bonus

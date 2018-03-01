@@ -25,11 +25,7 @@ public class User implements Serializable {
         quests = new QuestList(this);
         perks = new PerkTable(this);
         level = new Level(this, perks);
-
-        // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Created new User " + name);
-        }
+        Log.d("QuestLog.System", "Created new User " + name);
     }
 
 // Getters //

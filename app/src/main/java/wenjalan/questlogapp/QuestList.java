@@ -20,9 +20,7 @@ public class QuestList implements Serializable {
         this.user = user;
 
         // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Created new QuestList for User " + user.getName());
-        }
+        Log.d("QuestLog.System", "Created new QuestList for User " + user.getName());
     }
 
 // Methods //
@@ -40,18 +38,11 @@ public class QuestList implements Serializable {
             // reward exp
             user.getLevel().addExp(exp, perk);
             // remove quest
-            // TODO: Move to history instead of removing
             questList.remove(quest);
-
-            // debug
-            if (QuestLog.DEBUG) {
-                Log.d("QuestLogApp", "Rewarding user " + user.getName() + " for SideQuest " + quest.getName() + "...");
-            }
+            Log.d("QuestLog.System", "Rewarding user " + user.getName() + " for SideQuest " + quest.getName() + "...");
         }
         else {
-            if (QuestLog.DEBUG) {
-                Log.d("QuestLogApp", "Tried to reward user " + user.getName() + " for SideQuest " + quest.getName() + ", but it wasn't completed");
-            }
+            Log.d("QuestLog.System", "Tried to reward user " + user.getName() + " for SideQuest " + quest.getName() + ", but it wasn't completed");
         }
     }
 
@@ -59,31 +50,19 @@ public class QuestList implements Serializable {
     // adds a SideQuest given a SideQuest
     public void addQuest(SideQuest quest) {
         questList.add(quest);
-
-        // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Added SideQuest " + quest.getName() + " to " + user.getName() + "'s QuestList");
-        }
+        Log.d("QuestLog.System", "Added SideQuest " + quest.getName() + " to " + user.getName() + "'s QuestList");
     }
 
     // removes a SideQuest given a SideQuest
     public void removeQuest(SideQuest quest) {
         questList.remove(quest);
-
-        // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Removed SideQuest " + quest.getName() + " from " + user.getName() + "'s QuestList");
-        }
+        Log.d("QuestLog.System", "Removed SideQuest " + quest.getName() + " from " + user.getName() + "'s QuestList");
     }
 
     // removes a SideQuest given an index
     public void removeQuest(int index) {
         questList.remove(index);
-
-        // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Removed SideQuest at index " + index + " from " + user.getName() + "'s QuestList");
-        }
+        Log.d("QuestLog.System", "Removed SideQuest at index " + index + " from " + user.getName() + "'s QuestList");
     }
 
 // Getters //
@@ -101,19 +80,4 @@ public class QuestList implements Serializable {
     public int quests() {
         return this.questList.size();
     }
-
-    // toString, meant for debugging purposes only
-    @Override
-    public String toString() {
-        if (questList.size() == 0) {
-            return "NO QUESTS ADDED";
-        }
-        String r = "";
-        // iterate through the questList
-        for (int i = 0; i < questList.size(); i++) {
-            r += questList.get(i).toString() + "\n";
-        }
-        return r;
-    }
-
 }

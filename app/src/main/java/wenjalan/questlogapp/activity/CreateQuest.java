@@ -1,4 +1,6 @@
 package wenjalan.questlogapp.activity;
+// Activity used to create new SideQuests
+// Creates a new SideQuest given user-generated fields and returns to Home
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -41,26 +43,26 @@ public class CreateQuest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quest);
         start();
-        Log.d("CreateQuest", "CREATED activity CreateQuest");
+        Log.d("QuestLog.Android", "CREATED activity CreateQuest");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         save();
-        Log.d("CreateQuest", "PAUSED activity CreateQuest");
+        Log.d("QuestLog.Android", "PAUSED activity CreateQuest");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("CreateQuest", "RESUMED activity CreateQuest");
+        Log.d("QuestLog.Android", "RESUMED activity CreateQuest");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("CreateQuest", "DESTROYED activity CreateQuest");
+        Log.d("QuestLog.Android", "DESTROYED activity CreateQuest");
     }
 
 // Methods //
@@ -97,10 +99,10 @@ public class CreateQuest extends AppCompatActivity {
             outputStream.close();
 
             // log
-            Log.d("CreateQuest", "Saved QuestLog to storage");
+            Log.d("QuestLog.Android", "Saved QuestLog to storage");
         } catch (Exception e) {
             e.printStackTrace();
-            Log.d("CreateQuest", "Failed to save QuestLog to storage");
+            Log.d("QuestLog.Android", "Failed to save QuestLog to storage");
         }
     }
 
@@ -146,7 +148,7 @@ public class CreateQuest extends AppCompatActivity {
         taskList.addView(taskViews.get(taskViews.size() - 1));
 
         // log
-        Log.d("CreateQuest", "Added a Task field");
+        Log.d("QuestLog.Android", "Added a Task field");
     }
 
     // called when the user taps a Delete Button on a Task Field
@@ -161,7 +163,7 @@ public class CreateQuest extends AppCompatActivity {
         tasksList.removeView(field);
 
         // log
-        Log.d("CreateQuest", "Removed a Task field");
+        Log.d("QuestLog.Android", "Removed a Task field");
     }
 
     // called when the user taps the Create Quest button
@@ -183,7 +185,7 @@ public class CreateQuest extends AppCompatActivity {
         try {
             questExp = Integer.valueOf(expField.getText().toString());
         } catch (NumberFormatException e) {
-            Log.d("CreateQuest", "Failed to create quest: non-integer value " + expField.getText().toString() + " as an EXP reward");
+            Log.d("QuestLog.Android", "Failed to create quest: non-integer value " + expField.getText().toString() + " as an EXP reward");
             return;
         }
 
@@ -206,7 +208,7 @@ public class CreateQuest extends AppCompatActivity {
 
         // close this activity
         // debug
-        Log.d("CreateQuest", "SideQuest" + quest.getName() + " created, closing activity...");
+        Log.d("QuestLog.Android", "SideQuest" + quest.getName() + " created, closing activity...");
         finish();
     }
 

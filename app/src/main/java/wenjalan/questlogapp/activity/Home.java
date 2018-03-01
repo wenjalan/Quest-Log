@@ -1,4 +1,6 @@
 package wenjalan.questlogapp.activity;
+// The Home screen where the user's quests are displayed
+// Acts as the main activity, allowing access to Profile and CreateQuest
 
 import android.content.Context;
 import android.content.Intent;
@@ -42,14 +44,14 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         start();
-        Log.d("Home", "CREATED activity Home");
+        Log.d("QuestLog.Android", "CREATED activity Home");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         save();
-        Log.d("Home", "PAUSED activity Home");
+        Log.d("QuestLog.Android", "PAUSED activity Home");
     }
 
     @Override
@@ -57,13 +59,13 @@ public class Home extends AppCompatActivity {
         super.onResume();
         // load();
         render();
-        Log.d("Home", "RESUMED activity Home");
+        Log.d("QuestLog.Android", "RESUMED activity Home");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("Home", "DESTROYED activity Home");
+        Log.d("QuestLog.Android", "DESTROYED activity Home");
     }
 
 // Methods //
@@ -272,6 +274,9 @@ public class Home extends AppCompatActivity {
         // edit the task's desc
         TextView taskDesc = taskView.findViewById(R.id.taskDesc);
         taskDesc.setText(t.getDescription());
+        // set the task's status
+        CheckBox taskCheckBox = taskView.findViewById(R.id.taskCheckBox);
+        taskCheckBox.setChecked(t.isComplete());
     }
 
 

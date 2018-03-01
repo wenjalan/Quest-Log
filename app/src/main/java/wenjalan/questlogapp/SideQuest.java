@@ -20,8 +20,7 @@ public class SideQuest implements Completable, Serializable {
     private ArrayList<Task> tasks;          // the list of Tasks to complete this SideQuest
 
 // Constructor //
-    // TODO: Make SideQuest auto-add itself to a QuestList upon creation?
-    public SideQuest(QuestList questList, String name, String description, int expReward) {
+    /* public SideQuest(QuestList questList, String name, String description, int expReward) {
         init();
         this.questList = questList;
         this.name = name;
@@ -29,12 +28,10 @@ public class SideQuest implements Completable, Serializable {
         this.expReward = expReward;
 
         // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Successfully created new SideQuest " + this.name);
-        }
-    }
+        Log.d("QuestLog.System", "Successfully created new SideQuest " + this.name);
+    } */
 
-    public SideQuest(QuestList questList, String name, String description, int expReward, String perkCategory) {
+    /* public SideQuest(QuestList questList, String name, String description, int expReward, String perkCategory) {
         init();
         this.questList = questList;
         this.name = name;
@@ -43,10 +40,8 @@ public class SideQuest implements Completable, Serializable {
         this.perkCategory = perkCategory;
 
         // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Successfully created new SideQuest " + this.name);
-        }
-    }
+        Log.d("QuestLog.System", "Successfully created new SideQuest " + this.name);
+    } */
 
     public SideQuest(QuestList questList, String name, String description, int expReward, String perkCategory, Task... tasks) {
         init();
@@ -56,11 +51,7 @@ public class SideQuest implements Completable, Serializable {
         this.expReward = expReward;
         this.perkCategory = perkCategory;
         this.addTasks(tasks);
-
-        // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Successfully created new SideQuest " + this.name);
-        }
+        Log.d("QuestLog.System", "Successfully created new SideQuest " + this.name);
     }
 
 // Methods //
@@ -76,18 +67,16 @@ public class SideQuest implements Completable, Serializable {
 
     // completes this SideQuest
     // should only be called once all Tasks are complete
-    public void complete() {
+    private void complete() {
         this.isComplete = true;
         questList.rewardUserFor(this);
     }
 
     // force completes a SideQuest if in debug mode
     // dev use only
-    public void forceComplete() {
-        if (QuestLog.DEBUG) {
-            complete();
-        }
-    }
+    /* public void forceComplete() {
+        complete();
+    } */
 
 // Setters //
     // adds Task(s) to this SideQuest
@@ -95,11 +84,7 @@ public class SideQuest implements Completable, Serializable {
         for (Task t : tasks) {
             this.tasks.add(t);
         }
-
-        // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Added task(s) to SideQuest " + this.name);
-        }
+        Log.d("QuestLog.System", "Added task(s) to SideQuest " + this.name);
     }
 
     // completes Task(s) of this SideQuest
@@ -168,7 +153,6 @@ public class SideQuest implements Completable, Serializable {
     }
 
     // returns the Perk this SideQuest is associated with
-    // TODO: Ensure it works with no perk category
     public String getPerkCategory() {
         return this.perkCategory;
     }

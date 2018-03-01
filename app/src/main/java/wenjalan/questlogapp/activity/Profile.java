@@ -1,4 +1,5 @@
 package wenjalan.questlogapp.activity;
+// Activity used to display the user's stats and perks
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -29,27 +30,27 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         start();
-        Log.d("Profile", "STARTED activity Profile");
+        Log.d("QuestLog.Android", "CREATED activity Profile");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         save();
-        Log.d("Profile", "PAUSED activity Profile");
+        Log.d("QuestLog.Android", "PAUSED activity Profile");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         render();
-        Log.d("Profile", "RESUMED activity Profile");
+        Log.d("QuestLog.Android", "RESUMED activity Profile");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("Profile", "DESTROYED activity Profile");
+        Log.d("QuestLog.Android", "DESTROYED activity Profile");
     }
 
 // Methods //
@@ -85,10 +86,10 @@ public class Profile extends AppCompatActivity {
             outputStream.close();
 
             // log
-            Log.d("Profile", "Saved QuestLog to storage");
+            Log.d("QuestLog.Android", "Saved QuestLog to storage");
         } catch (Exception e) {
             e.printStackTrace();
-            Log.d("Profile", "Failed to save QuestLog to storage");
+            Log.d("QuestLog.Android", "Failed to save QuestLog to storage");
         }
     }
 

@@ -28,11 +28,7 @@ public class PerkTable implements Serializable {
     public PerkTable(User user) {
         init();
         this.user = user;
-
-        // Log for debugging purposes
-        if (QuestLog.DEBUG) {
-            Log.d("QuestLogApp", "Created new PerkTable for User " + user.getName());
-        }
+        Log.d("QuestLog.System", "Created new PerkTable for User " + user.getName());
     }
 
 // Methods //
@@ -55,16 +51,10 @@ public class PerkTable implements Serializable {
             // consume used points
             this.perks.put(Perks.UNUSED, perks.get(Perks.UNUSED) - points);
 
-            // debugging
-            if (QuestLog.DEBUG) {
-                Log.d("QuestLogApp", "Added " + points + " points to " + perk);
-            }
+            Log.d("QuestLog.System", "Added " + points + " points to " + perk);
         }
         else {
-            // debugging
-            if (QuestLog.DEBUG) {
-                Log.d("QuestLogApp", "Failed to add " + points + " points to " + perk + ", insufficient unused points.");
-            }
+            Log.d("QuestLog.System", "Failed to add " + points + " points to " + perk + ", insufficient unused points.");
         }
     }
 
