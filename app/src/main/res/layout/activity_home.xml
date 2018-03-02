@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
-    <Button
+    <!-- <Button
         android:id="@+id/newQuestButton"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
@@ -17,7 +17,7 @@
         android:onClick="newQuest"
         android:text="New Quest"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" /> -->
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/createQuestNavigationBar"
@@ -88,5 +88,17 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/newQuestButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="newQuest"
+        android:src="@drawable/ic_add_black_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

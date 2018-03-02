@@ -161,6 +161,11 @@ public class Profile extends AppCompatActivity {
     }
 
 // Listeners //
+    // when the user taps the up button
+    public void navigationUp(View view) {
+        finish();
+    }
+
     // when the user presses an add point button
     public void addPointPhysical(View view) {
         addPoint(PerkTable.Perks.PHYSICAL);
@@ -185,12 +190,33 @@ public class Profile extends AppCompatActivity {
 
     // deletes all user data
     public void deleteUserData(View view) {
-        // Get the file and delete it
-        File data = new File(Environment.getRootDirectory(), QuestLog.DATA_FILE_NAME);
-        data.delete();
+        // write an empty QuestLog to the save
+        FileOutputStream outputStream;
+        ObjectOutputStream objectOutputStream;
+
+        // output the QuestLog to storage
+        try {
+            // initialize
+            outputStream = openFileOutput(QuestLog.DATA_FILE_NAME, Context.MODE_PRIVATE);
+            objectOutputStream = new ObjectOutputStream(outputStream);
+
+            // write the QuestLog to the data file
+            objectOutputStream.writeObject(new QuestLog("AlphaUser"));
+
+            // close the streams
+            objectOutputStream.close();
+            outputStream.close();
+
+            // log
+            Log.d("QuestLog.Android", "Deleted user data");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("QuestLog.Android", "Failed to delete user data");
+        }
+
         Log.d("QuestLog.Android", "Deleted user data");
         // restart the app
-        restart();
+        // restart();
     }
 
     // restarts the app

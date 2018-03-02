@@ -20,7 +20,9 @@
             android:name=".activity.CreateQuest"
             android:parentActivityName=".activity.Home">
         </activity>
-        <activity android:name=".activity.Profile">
+        <activity
+            android:name=".activity.Profile"
+            android:parentActivityName=".activity.Home">
         </activity>
     </application>
 
