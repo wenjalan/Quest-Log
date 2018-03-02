@@ -231,21 +231,38 @@ public class CreateQuest extends AppCompatActivity {
     }
 
     // called when the user taps the Create Quest button
-    // TODO: Check if the fields are valid before crashing
+    // if any field is found to be invalid, returns
+    // TODO: Add Snackbar to show user the error
     public void createQuest(View view) {
-        // grab references to all the fields
-        EditText titleField = findViewById(R.id.questTitleField);
-        EditText descField = findViewById(R.id.questDescField);
-        Spinner perkField = findViewById(R.id.perkSpinner);
-        EditText expField = findViewById(R.id.questExpField);
-        LinearLayout taskFields = findViewById(R.id.questTasksLinearLayout);
+        // the fields the user enters
+        String questTitle;
+        String questDesc;
+        int questExp;
+        String questPerk;
+        Task[] questTasks;
 
-        // extract the easy ones
-        String questTitle = titleField.getText().toString();
-        String questDesc = descField.getText().toString();
+        // title
+        EditText titleField = findViewById(R.id.questTitleField);
+        questTitle = titleField.getText().toString();
+
+        // check if the title is empty
+        if (questTitle.isEmpty()) {
+            Log.d("QuestLog.Android", "Failed to create quest: Invalid title");
+            return;
+        }
+
+        // description
+        EditText descField = findViewById(R.id.questDescField);
+        questDesc = descField.getText().toString();
+
+        // check if the description is empty
+        if (questDesc.isEmpty()) {
+            Log.d("QuestLog.Android", "Failed to create quest: Invalid description");
+            return;
+        }
 
         // exp
-        int questExp;
+        EditText expField = findViewById(R.id.questExpField);
         try {
             questExp = Integer.valueOf(expField.getText().toString());
         } catch (NumberFormatException e) {
@@ -253,9 +270,29 @@ public class CreateQuest extends AppCompatActivity {
             return;
         }
 
-        // extract the harder ones, should be foolproof
-        String questPerk = getPerkFromField(perkField);
-        Task[] questTasks = getTasksFromFields();
+        // check if the amount of exp is negative
+        if (questExp < 0) {
+            Log.d("QuestLog.Android", "Failed to create quest: EXP reward < 0");
+            return;
+        }
+
+        // check if the amount of exp is greater than one level's worth of exp
+        if (questExp < this.user.getLevel().getExpToNextLevel()) {
+            Log.d("QuestLog.Android", "Failed to create quest: EXP reward exceeds max cap");
+            return;
+        }
+
+        // perk
+        Spinner perkField = findViewById(R.id.perkSpinner);
+        questPerk = getPerkFromField(perkField);
+
+        // tasks
+        try {
+            questTasks = getTasksFromFields();
+        } catch (IllegalArgumentException e) {
+            Log.d("QuestLog.Android", "Failed to create quest: Task field is empty");
+            return;
+        }
 
         // create the new SideQuest object and add it to the QuestList
         SideQuest quest = new SideQuest(
@@ -280,7 +317,6 @@ public class CreateQuest extends AppCompatActivity {
         }
 
         // close this activity
-        // debug
         Log.d("QuestLog.Android", "SideQuest" + quest.getName() + " created, closing activity...");
         finish();
     }
@@ -315,6 +351,10 @@ public class CreateQuest extends AppCompatActivity {
             EditText field = task.findViewById(R.id.createTaskDesc);
             // get the text inside the field
             String desc = field.getText().toString();
+            // check if the field is empty
+            if (desc.isEmpty()) {
+                throw new IllegalArgumentException("Task field is empty");
+            }
             // create a new Task from that text
             Task t = new Task(desc);
             // add the new Task to the ArrayList

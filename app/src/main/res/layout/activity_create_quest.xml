@@ -65,20 +65,29 @@
                 android:hint="Quest Description"
                 android:inputType="textMultiLine" />
 
-            <Spinner
-                android:id="@+id/perkSpinner"
+            <LinearLayout
+                android:id="@+id/questPerkExpLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/questExpField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="EXP Reward"
-                android:inputType="number" />
+                <EditText
+                    android:id="@+id/questExpField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="EXP Reward"
+                    android:inputType="number" />
+
+                <Spinner
+                    android:id="@+id/perkSpinner"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/questTasksLinearLayout"
@@ -93,14 +102,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="addTaskView"
-                android:text="Add Task" />
+                android:text="Add Another Task" />
 
             <Button
                 android:id="@+id/questCreateButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="createQuest"
-                android:text="Create Quest" />
+                android:text="Create Quest"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>
