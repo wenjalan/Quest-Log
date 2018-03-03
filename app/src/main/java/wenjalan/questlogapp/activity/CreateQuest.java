@@ -216,6 +216,9 @@ public class CreateQuest extends AppCompatActivity {
         // display the recent most view in taskViews
         taskList.addView(taskViews.get(taskViews.size() - 1));
 
+        // set the focus to the edittext
+        taskView.findViewById(R.id.createTaskDesc).requestFocus();
+
         // log
         Log.d("QuestLog.Android", "Added a Task field");
     }
@@ -224,15 +227,20 @@ public class CreateQuest extends AppCompatActivity {
     public void destroyTaskField(View view) {
         // Get the list of Tasks Views
         ViewGroup tasksList = (ViewGroup) findViewById(R.id.questTasksLinearLayout);
-        // Grab the entire task field the button's from
-        View field = (View) view.getParent().getParent();
-        // Remove the field from the taskViews list
-        taskViews.remove(field);
-        // Delete the parent of the button that called
-        tasksList.removeView(field);
+        // if this view isn't the last view in the list
+        if (taskViews.size() > 1) {
+            // Grab the entire task field the button's from
+            View field = (View) view.getParent().getParent();
+            // Remove the field from the taskViews list
+            taskViews.remove(field);
+            // Delete the parent of the button that called
+            tasksList.removeView(field);
+            Log.d("QuestLog.Android", "Removed a Task field");
+        }
+        else {
+            Log.d("QuestLog.Android", "Couldn't remove Task field, it's the last one");
+        }
 
-        // log
-        Log.d("QuestLog.Android", "Removed a Task field");
     }
 
     // called when the user taps the Create Quest button
