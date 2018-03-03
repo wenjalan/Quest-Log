@@ -7,18 +7,6 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
-    <!-- <Button
-        android:id="@+id/newQuestButton"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="newQuest"
-        android:text="New Quest"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" /> -->
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/createQuestNavigationBar"
         android:layout_width="match_parent"
