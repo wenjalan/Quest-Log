@@ -120,6 +120,9 @@ public class CreateQuest extends AppCompatActivity {
         if (editQuestIndex >= 0) {
             loadQuest(editQuestIndex);
         }
+
+        // set the focus to the title EditText
+        findViewById(R.id.questTitleField).requestFocus();
     }
 
     // creates empty task fields, references stored in taskViews[]

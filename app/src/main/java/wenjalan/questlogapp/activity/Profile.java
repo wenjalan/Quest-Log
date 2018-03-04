@@ -190,43 +190,12 @@ public class Profile extends AppCompatActivity {
 
     // deletes all user data
     public void deleteUserData(View view) {
-        // write an empty QuestLog to the save
-        FileOutputStream outputStream;
-        ObjectOutputStream objectOutputStream;
-
-        // output the QuestLog to storage
-        try {
-            // initialize
-            outputStream = openFileOutput(QuestLog.DATA_FILE_NAME, Context.MODE_PRIVATE);
-            objectOutputStream = new ObjectOutputStream(outputStream);
-
-            // write the QuestLog to the data file
-            objectOutputStream.writeObject(new QuestLog("AlphaUser"));
-
-            // close the streams
-            objectOutputStream.close();
-            outputStream.close();
-
-            // log
-            Log.d("QuestLog.Android", "Deleted user data");
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.d("QuestLog.Android", "Failed to delete user data");
-        }
-
+        // delete the data file
+        deleteFile(QuestLog.DATA_FILE_NAME);
+        // replace the reference to the old questLog
+        Home.questLog = null;
         Log.d("QuestLog.Android", "Deleted user data");
         // restart the app
-        // restart();
-    }
-
-    // restarts the app
-    private void restart() {
-        Log.d("QuestLog.Android", "Restarting application...");
-        Intent i = new Intent(this, Home.class);
-        int id = 252525;
-        PendingIntent p = PendingIntent.getActivity(this, id, i, PendingIntent.FLAG_CANCEL_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 100, p);
         System.exit(0);
     }
 

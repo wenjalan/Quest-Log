@@ -123,6 +123,11 @@ public class Home extends AppCompatActivity {
             // read the QuestLog from storage
             this.questLog = (QuestLog) objectInputStream.readObject();
 
+            // if there was no questLog
+            if (this.questLog == null) {
+                throw new Exception("No QuestLog data found");
+            }
+
             // close
             objectInputStream.close();
             fileInputStream.close();
