@@ -7,18 +7,6 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
-    <!-- <Button
-        android:id="@+id/newQuestButton"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="newQuest"
-        android:text="New Quest"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" /> -->
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/createQuestNavigationBar"
         android:layout_width="match_parent"
@@ -44,15 +32,17 @@
         <ProgressBar
             android:id="@+id/userExpBar"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="256dp"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginEnd="64dp"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userLevelTextView" />
 
-        <Button
+        <!-- <Button
             android:id="@+id/userProfileButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -62,6 +52,18 @@
             android:layout_marginTop="8dp"
             android:onClick="loadProfile"
             android:text="Profile"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/userExpBar"
+            app:layout_constraintTop_toTopOf="parent" /> -->
+
+        <ImageButton
+            android:id="@+id/userProfileButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?attr/selectableItemBackground"
+            android:onClick="loadProfile"
+            android:src="@drawable/ic_person_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/userExpBar"
