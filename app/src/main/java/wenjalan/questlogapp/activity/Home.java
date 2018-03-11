@@ -44,9 +44,11 @@ public class Home extends AppCompatActivity {
         Log.d("QuestLog.Android", "CREATED activity Home");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        start();
-    }
+        // start();
 
+        ((ProgressBar) findViewById(R.id.expBar)).setProgress(50);
+    }
+/*
     @Override
     protected void onPause() {
         Log.d("QuestLog.Android", "PAUSED activity Home");
@@ -365,5 +367,5 @@ public class Home extends AppCompatActivity {
         LinearLayout questListLinearLayout = (LinearLayout) sideQuestLinearLayout.getParent();
         return questListLinearLayout.indexOfChild(sideQuestLinearLayout);
     }
-
+*/
 }

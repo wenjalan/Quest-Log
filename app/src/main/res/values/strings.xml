@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Quest Log Alpha</string>
-    <string name="userLevelDefault">Level X</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="appVersion">1.0</string>
+    <string name="textLevel">Level 0</string>
 </resources>
