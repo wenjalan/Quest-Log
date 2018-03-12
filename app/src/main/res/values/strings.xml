@@ -4,4 +4,5 @@
     <string name="textLevel">Level 0</string>
     <string name="textQuestTitle">Quest Title</string>
     <string name="textQuestDescription">Quest Description</string>
+    <string name="textQuestTaskDescription">Task Description</string>
 </resources>

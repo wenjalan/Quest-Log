@@ -48,18 +48,26 @@ public class Home extends AppCompatActivity {
 
         ((ProgressBar) findViewById(R.id.expBar)).setProgress(50);
 
-        LinearLayout questsLayout = findViewById(R.id.questsLayout);
         LayoutInflater inflater = this.getLayoutInflater();
 
-        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
-        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
-        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
-        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
-        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
-        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
-        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
-        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
-        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
+        LinearLayout questsLayout = findViewById(R.id.questsLayout);
+
+        View sidequest = inflater.inflate(R.layout.home_sidequest, questsLayout, false);
+
+        questsLayout.addView(sidequest);
+
+        LinearLayout tasksLayout = sidequest.findViewById(R.id.tasksLayout);
+
+        View task = inflater.inflate(R.layout.home_sidequest_task, tasksLayout, false);
+
+        tasksLayout.addView(task);
+        tasksLayout.addView(inflater.inflate(R.layout.home_sidequest_task, tasksLayout, false));
+        tasksLayout.addView(inflater.inflate(R.layout.home_sidequest_task, tasksLayout, false));
+        tasksLayout.addView(inflater.inflate(R.layout.home_sidequest_task, tasksLayout, false));
+        tasksLayout.addView(inflater.inflate(R.layout.home_sidequest_task, tasksLayout, false));
+        tasksLayout.addView(inflater.inflate(R.layout.home_sidequest_task, tasksLayout, false));
+        tasksLayout.addView(inflater.inflate(R.layout.home_sidequest_task, tasksLayout, false));
+
 
 
     }
