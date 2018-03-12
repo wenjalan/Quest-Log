@@ -47,6 +47,21 @@ public class Home extends AppCompatActivity {
         // start();
 
         ((ProgressBar) findViewById(R.id.expBar)).setProgress(50);
+
+        LinearLayout questsLayout = findViewById(R.id.questsLayout);
+        LayoutInflater inflater = this.getLayoutInflater();
+
+        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
+        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
+        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
+        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
+        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
+        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
+        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
+        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
+        questsLayout.addView(inflater.inflate(R.layout.home_sidequest, questsLayout, false));
+
+
     }
 /*
     @Override

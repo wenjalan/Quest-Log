@@ -2,4 +2,6 @@
     <string name="app_name">Quest Log Alpha</string>
     <string name="appVersion">1.0</string>
     <string name="textLevel">Level 0</string>
+    <string name="textQuestTitle">Quest Title</string>
+    <string name="textQuestDescription">Quest Description</string>
 </resources>
