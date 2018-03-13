@@ -44,34 +44,9 @@ public class Home extends AppCompatActivity {
         Log.d("QuestLog.Android", "CREATED activity Home");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        // start();
-
-        ((ProgressBar) findViewById(R.id.expBar)).setProgress(50);
-
-        LayoutInflater inflater = this.getLayoutInflater();
-
-        LinearLayout questsLayout = findViewById(R.id.questsLayout);
-
-        View sidequest = inflater.inflate(R.layout.home_sidequest, questsLayout, false);
-
-        questsLayout.addView(sidequest);
-
-        LinearLayout tasksLayout = sidequest.findViewById(R.id.tasksLayout);
-
-        View task = inflater.inflate(R.layout.home_sidequest_task, tasksLayout, false);
-
-        tasksLayout.addView(task);
-        tasksLayout.addView(inflater.inflate(R.layout.home_sidequest_task, tasksLayout, false));
-        tasksLayout.addView(inflater.inflate(R.layout.home_sidequest_task, tasksLayout, false));
-        tasksLayout.addView(inflater.inflate(R.layout.home_sidequest_task, tasksLayout, false));
-        tasksLayout.addView(inflater.inflate(R.layout.home_sidequest_task, tasksLayout, false));
-        tasksLayout.addView(inflater.inflate(R.layout.home_sidequest_task, tasksLayout, false));
-        tasksLayout.addView(inflater.inflate(R.layout.home_sidequest_task, tasksLayout, false));
-
-
-
+        start();
     }
-/*
+
     @Override
     protected void onPause() {
         Log.d("QuestLog.Android", "PAUSED activity Home");
@@ -183,7 +158,7 @@ public class Home extends AppCompatActivity {
     // updates the user's level text on the homepage
     private void updateUserLevelText() {
         // get a reference to the TextView
-        TextView userLevelTextView = findViewById(R.id.userLevelTextView);
+        TextView userLevelTextView = findViewById(R.id.levelText);
         // get a reference to the User's Level
         Level userLevel = this.user.getLevel();
         // get the User's current level
@@ -195,9 +170,7 @@ public class Home extends AppCompatActivity {
     // updates the user's EXP bar on the homepage
     private void updateUserEXPBar() {
         // get a reference to the ProgressBar
-        ProgressBar expBar = findViewById(R.id.userExpBar);
-        // get a reference to the User's Level
-        Level userLevel = user.getLevel();
+        ProgressBar expBar = findViewById(R.id.expBar);
         // get the user's current progress towards their next level
         int progress = this.user.getLevel().getLevelProgress();
         // update the progress
@@ -221,18 +194,18 @@ public class Home extends AppCompatActivity {
 
     // clears the SideQuests off the screen to refresh
     private void clearQuestViews() {
-        LinearLayout questList = findViewById(R.id.questListLinearLayout);
+        LinearLayout questList = findViewById(R.id.questsLayout);
         questList.removeAllViews();
     }
 
     // displays a single sideQuest on the homepage
     private void displayQuest(SideQuest sideQuest) {
         // get a reference to the questListLinearLayout
-        LinearLayout questList = findViewById(R.id.questListLinearLayout);
+        LinearLayout questList = findViewById(R.id.questsLayout);
         // get an inflater
         LayoutInflater inflater = getLayoutInflater();
         // create a new View to hold the SideQuest in
-        View questView = inflater.inflate(R.layout.fragment_sidequest, questList, false);
+        View questView = inflater.inflate(R.layout.home_sidequest, questList, false);
         // add the view to the list
         questList.addView(questView);
 
@@ -255,19 +228,19 @@ public class Home extends AppCompatActivity {
 
     // displays the title of a Quest
     private void displayQuestTitle(View questView, String questTitle) {
-        TextView title = questView.findViewById(R.id.sideQuestTitle);
+        TextView title = questView.findViewById(R.id.title);
         title.setText(questTitle);
     }
 
     // displays the description of a Quest
     private void displayQuestDesc(View questView, String questDesc) {
-        TextView desc = questView.findViewById(R.id.sideQuestDesc);
+        TextView desc = questView.findViewById(R.id.description);
         desc.setText(questDesc);
     }
 
     // displays the perk of a Quest
     private void displayQuestPerk(View questView, String questPerk) {
-        TextView perk = questView.findViewById(R.id.sideQuestPerk);
+        TextView perk = questView.findViewById(R.id.reward);
         if (questPerk != null) {
             perk.setText(questPerk);
         }
@@ -278,14 +251,15 @@ public class Home extends AppCompatActivity {
 
     // displays the EXP reward of a Quest
     private void displayQuestReward(View questView, int questReward) {
-        TextView expText = questView.findViewById(R.id.sideQuestEXP);
-        expText.setText("" + questReward + " EXP"); // have to explicitly convert it to String
+        TextView expText = questView.findViewById(R.id.reward);
+        String expString = expText.getText().toString();
+        expText.setText(expString + ", " + questReward + " EXP"); // have to explicitly convert it to String
     }
 
     // displays the tasks of a Quest
     private void displayQuestTasks(View questView, LayoutInflater inflater, SideQuest quest) {
         // get the task list Linear Layout
-        LinearLayout taskList = questView.findViewById(R.id.sideQuestTaskList);
+        LinearLayout taskList = questView.findViewById(R.id.tasksLayout);
         // add the tasks
         for (int i = 0; i < quest.tasks(); i++) {
             // get the current task
@@ -298,14 +272,14 @@ public class Home extends AppCompatActivity {
     // displays a Task inside a SideQuest view, used only by displayQuestTasks
     private void displayTask(LinearLayout taskList, LayoutInflater inflater, Task t) {
         // inflate a view
-        View taskView = inflater.inflate(R.layout.fragment_task, taskList, false);
+        View taskView = inflater.inflate(R.layout.home_sidequest_task, taskList, false);
         // add the task
         taskList.addView(taskView);
         // edit the task's desc
-        TextView taskDesc = taskView.findViewById(R.id.taskDesc);
+        TextView taskDesc = taskView.findViewById(R.id.description);
         taskDesc.setText(t.getDescription());
         // set the task's status
-        CheckBox taskCheckBox = taskView.findViewById(R.id.taskCheckBox);
+        CheckBox taskCheckBox = taskView.findViewById(R.id.checkBox);
         taskCheckBox.setChecked(t.isComplete());
     }
 
@@ -390,5 +364,5 @@ public class Home extends AppCompatActivity {
         LinearLayout questListLinearLayout = (LinearLayout) sideQuestLinearLayout.getParent();
         return questListLinearLayout.indexOfChild(sideQuestLinearLayout);
     }
-*/
+
 }

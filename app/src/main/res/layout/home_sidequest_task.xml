@@ -27,11 +27,10 @@
 
         <CheckBox
             android:id="@+id/checkBox"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:button="@mipmap/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/checkbox"
+            android:onClick="toggleTaskStatus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
