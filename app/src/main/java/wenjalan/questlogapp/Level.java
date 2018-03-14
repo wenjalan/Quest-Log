@@ -102,7 +102,8 @@ public class Level implements Serializable {
 
     // returns the progress towards the next level as a percent
     public int getLevelProgress() {
-        return (int) ((double) this.userExperience / (double) this.nextLevelExperience * 100);
+        double progress = (double) this.getExp() / (double) this.getExpToNextLevel();
+        return (int) (100.0 * progress);
     }
 
     // returns the owner of this Level

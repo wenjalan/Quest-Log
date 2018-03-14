@@ -2,6 +2,8 @@ package wenjalan.questlogapp.activity;
 // The Home screen where the user's quests are displayed
 // Acts as the main activity, allowing access to Profile and CreateQuest
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -177,38 +180,70 @@ public class Home extends AppCompatActivity {
         // get a reference to the ProgressBar
         ProgressBar expBar = findViewById(R.id.expBar);
         // get the current EXP in the bar
-        int current = expBar.getProgress();
+        int barProgress = expBar.getProgress();
         // get the user's current progress towards their next level
-        int progress = this.user.getLevel().getLevelProgress();
+        int expProgress = this.user.getLevel().getLevelProgress();
 
-        // update the progress
-        animateExpGain(expBar, progress, current, false);
+        // Log
+        Log.d("QuestLog.Android", "EXP Bar Progress : " + barProgress + ", EXP Progress: " + expProgress);
+
+        // If the progresses are different
+        if (barProgress != expProgress) {
+            // if the user leveled up
+            if (barProgress > expProgress) {
+                // if the bar's progress is more than the exp's progress, signaling a levelup
+                animateExpGain(expBar, 100);
+                animateExpGain(expBar, expProgress);
+            }
+            else {
+                animateExpGain(expBar, expProgress);
+            }
+        }
     }
 
     // animates the EXP bar gain
-    private void animateExpGain(final ProgressBar expBar, final int finish, int start, boolean levelup) {
-        EXPBarAnimation a = new EXPBarAnimation(expBar, finish, start);
-        a.setDuration(ANIMATION_EXP_BAR_DURATION);
-        // if the user leveled up, after the animation, call this method again to animate the other half
-        if (levelup) {
-            a.setAnimationListener(new Animation.AnimationListener() {
+    // TODO: Write about this in your writeup
+    private void animateExpGain(final ProgressBar expBar, final int finish) {
+        Log.d("QuestLog.Android", "Animating EXP Bar to " + finish);
+        ObjectAnimator animation;
+        int current = expBar.getProgress();
+
+        // if the bar is full
+        if (current >= 100) {
+            expBar.setProgress(0);
+            current = 0;
+        }
+
+        // if this animation should loop back around from 100 to 0
+        if (current > finish) {
+            Log.d("QuestLog.Android", "Looping EXP Bar...");
+            animation = ObjectAnimator.ofInt(expBar, "progress", 100);
+            animation.removeAllListeners();
+            animation.addListener(new Animator.AnimatorListener() {
                 @Override
-                public void onAnimationStart(Animation animation) {}
+                public void onAnimationStart(Animator animator) {}
 
                 @Override
-                public void onAnimationEnd(Animation animation) {
-                    animateExpGain(expBar, finish, 0, false);
+                public void onAnimationEnd(Animator animator) {
+                    animateExpGain(expBar, finish);
                 }
 
                 @Override
-                public void onAnimationRepeat(Animation animation) {}
+                public void onAnimationCancel(Animator animator) {}
+
+                @Override
+                public void onAnimationRepeat(Animator animator) {}
             });
         }
         else {
-            
+            animation = ObjectAnimator.ofInt(expBar, "progress", finish);
+            animation.removeAllListeners();
         }
+
         // start the animation
-        expBar.startAnimation(a);
+        animation.setDuration(ANIMATION_EXP_BAR_DURATION);
+        animation.setInterpolator(new DecelerateInterpolator());
+        animation.start();
     }
 
     // updates the questListLinearLayout with all SideQuest instances
