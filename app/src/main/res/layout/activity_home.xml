@@ -8,7 +8,7 @@
     android:background="@mipmap/poly_wallpaper">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/infobar"
+        android:id="@+id/navigationBar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:alpha="0.75"
@@ -79,7 +79,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/infobar" />
+            app:layout_constraintTop_toBottomOf="@+id/navigationBar" />
     </ScrollView>
 
     <android.support.design.widget.FloatingActionButton
