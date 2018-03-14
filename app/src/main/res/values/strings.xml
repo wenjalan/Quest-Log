@@ -7,4 +7,5 @@
     <string name="textQuestTaskDescription">Task Description</string>
     <string name="textExpReward">0 EXP</string>
     <string name="textProfile">Profile</string>
+    <string name="textExpProgress">000/000</string>
 </resources>
