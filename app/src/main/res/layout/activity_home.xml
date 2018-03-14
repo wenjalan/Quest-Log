@@ -93,7 +93,7 @@
         android:onClick="newQuest"
         app:backgroundTint="@color/colorPrimary"
         app:borderWidth="1dp"
-        app:elevation="0dp"
+        app:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
