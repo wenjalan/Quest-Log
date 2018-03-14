@@ -8,4 +8,8 @@
     <string name="textExpReward">0 EXP</string>
     <string name="textProfile">Profile</string>
     <string name="textExpProgress">000/000</string>
+    <string name="textPerks">Perks</string>
+    <string name="textPerkPhysical">Physical</string>
+    <string name="textPerkMental">Mental</string>
+    <string name="textPerkSocial">Social</string>
 </resources>
