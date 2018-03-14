@@ -184,9 +184,6 @@ public class Home extends AppCompatActivity {
         // get the user's current progress towards their next level
         int expProgress = this.user.getLevel().getLevelProgress();
 
-        // Log
-        Log.d("QuestLog.Android", "EXP Bar Progress : " + barProgress + ", EXP Progress: " + expProgress);
-
         // If the progresses are different
         if (barProgress != expProgress) {
             // if the user leveled up
@@ -284,11 +281,11 @@ public class Home extends AppCompatActivity {
         // description
         displayQuestDesc(questView, sideQuest.getDescription());
 
-        // perk
-        displayQuestPerk(questView, sideQuest.getPerkCategory());
-
         // EXP reward
         displayQuestReward(questView, sideQuest.getExpReward());
+
+        // perk
+        displayQuestPerk(questView, sideQuest.getPerkCategory());
 
         // tasks
         displayQuestTasks(questView, inflater, sideQuest);
@@ -307,22 +304,19 @@ public class Home extends AppCompatActivity {
         desc.setText(questDesc);
     }
 
-    // displays the perk of a Quest
-    private void displayQuestPerk(View questView, String questPerk) {
-        TextView perk = questView.findViewById(R.id.reward);
-        if (questPerk != null) {
-            perk.setText(questPerk);
-        }
-        else {
-            perk.setText("");
-        }
-    }
-
     // displays the EXP reward of a Quest
     private void displayQuestReward(View questView, int questReward) {
         TextView expText = questView.findViewById(R.id.reward);
-        String expString = expText.getText().toString();
-        expText.setText(expString + ", " + questReward + " EXP"); // have to explicitly convert it to String
+        expText.setText(questReward + " EXP"); // have to explicitly convert it to String
+    }
+
+    // displays the perk of a Quest
+    private void displayQuestPerk(View questView, String questPerk) {
+        TextView expText = questView.findViewById(R.id.reward);
+        String rewardText = expText.getText().toString();
+        if (questPerk != null) {
+            expText.setText(questPerk + ", " + rewardText);
+        }
     }
 
     // displays the tasks of a Quest
