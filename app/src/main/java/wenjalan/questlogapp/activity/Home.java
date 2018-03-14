@@ -400,7 +400,7 @@ public class Home extends AppCompatActivity {
     }
 
     // returns the SideQuest index of a SideQuest given a checkbox of a SideQuest's task
-    // TODO: Make it less messy/redundant
+    // TODO: Make it less messy
     private int getQuestIndex(View view) {
         // return the SideQuest this view belongs to
         ConstraintLayout taskConstraintLayout = (ConstraintLayout) view.getParent();
@@ -422,10 +422,10 @@ public class Home extends AppCompatActivity {
 
     // returns the index of the Quest that an Edit button is attached to
     private int getQuestIndexFromEditButton(View view) {
-        ConstraintLayout sideQuestConstraintLayout = (ConstraintLayout) view.getParent();
-        LinearLayout sideQuestLinearLayout = (LinearLayout) sideQuestConstraintLayout.getParent();
-        LinearLayout questListLinearLayout = (LinearLayout) sideQuestLinearLayout.getParent();
-        return questListLinearLayout.indexOfChild(sideQuestLinearLayout);
+        ConstraintLayout body = (ConstraintLayout) view.getParent();
+        LinearLayout sidequest = (LinearLayout) body.getParent();
+        LinearLayout questsList = (LinearLayout) sidequest.getParent();
+        return questsList.indexOfChild(sidequest);
     }
 
 }
