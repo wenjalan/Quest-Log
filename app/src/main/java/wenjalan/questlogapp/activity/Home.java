@@ -12,8 +12,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -26,14 +24,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import wenjalan.questlogapp.Level;
-import wenjalan.questlogapp.PerkTable;
 import wenjalan.questlogapp.QuestList;
 import wenjalan.questlogapp.QuestLog;
 import wenjalan.questlogapp.R;
 import wenjalan.questlogapp.SideQuest;
 import wenjalan.questlogapp.Task;
-import wenjalan.questlogapp.User;
-import wenjalan.questlogapp.animation.EXPBarAnimation;
 
 public class Home extends AppCompatActivity {
 
@@ -340,7 +335,7 @@ public class Home extends AppCompatActivity {
     // displays the tasks of a Quest
     private void displayQuestTasks(View questView, LayoutInflater inflater, SideQuest quest) {
         // get the task list Linear Layout
-        LinearLayout taskList = questView.findViewById(R.id.tasksLayout);
+        LinearLayout taskList = questView.findViewById(R.id.taskFieldsLayout);
         // add the tasks
         for (int i = 0; i < quest.tasks(); i++) {
             // get the current task
