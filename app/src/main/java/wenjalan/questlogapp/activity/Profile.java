@@ -103,14 +103,16 @@ public class Profile extends AppCompatActivity {
         // update the user information fields
         refreshName();
         refreshLevel();
-        // refreshPerks();
+        refreshPerks();
     }
 
-    // refreshes the user's username on the activity
+    // refreshes the username field
     private void refreshName() {
-        TextView userNameView = findViewById(R.id.userName);
-        String userName = user.getName();
-        userNameView.setText(userName);
+        // Get the username
+        String username = questLog.getUser().getName();
+        // Set the name
+        TextView nameField = findViewById(R.id.userName);
+        nameField.setText(username);
     }
 
     // refreshes the user's Level aspects, the level text and the bar
@@ -135,30 +137,30 @@ public class Profile extends AppCompatActivity {
         expBar.setProgress(progress);
     }
 
-//    // refreshes the user's Perk aspects, including percentages and unused points
-//    private void refreshPerks() {
-//        // get the PerkTable
-//        PerkTable perks = user.getPerkTable();
-//        // unused points text
-//        TextView unusedPointsView = findViewById(R.id.profileUnusedPerkPoints);
-//        int points = perks.getPointsIn(PerkTable.Perks.UNUSED);
-//        unusedPointsView.setText("Unused Perk Points: " + points);
-//
-//        // percentages
-//        TextView physicalPercentView = findViewById(R.id.profilePhysicalPointText);
-//        TextView mentalPercentView = findViewById(R.id.profileMentalPointText);
-//        TextView socialPercentView = findViewById(R.id.profileSocialPointText);
-//
-//        // get the percent bonuses from PerkTable
-//        int physicalPercent = perks.getBonusPercent(PerkTable.Perks.PHYSICAL);
-//        int mentalPercent = perks.getBonusPercent(PerkTable.Perks.MENTAL);
-//        int socialPercent = perks.getBonusPercent(PerkTable.Perks.SOCIAL);
-//
-//        // Set the percent in the views
-//        physicalPercentView.setText("+" + physicalPercent + "%");
-//        mentalPercentView.setText("+" + mentalPercent + "%");
-//        socialPercentView.setText("+" + socialPercent + "%");
-//    }
+    // refreshes the user's Perk aspects, including percentages and unused points
+    private void refreshPerks() {
+        // get the PerkTable
+        PerkTable perks = user.getPerkTable();
+        // unused points text
+        TextView unusedPointsView = findViewById(R.id.unusedPoints);
+        int points = perks.getPointsIn(PerkTable.Perks.UNUSED);
+        unusedPointsView.setText("Unused Points: " + points);
+
+        // percentages
+        TextView physicalPercentView = findViewById(R.id.bonusPhysical);
+        TextView mentalPercentView = findViewById(R.id.bonusMental);
+        TextView socialPercentView = findViewById(R.id.bonusSocial);
+
+        // get the percent bonuses from PerkTable
+        int physicalPercent = perks.getBonusPercent(PerkTable.Perks.PHYSICAL);
+        int mentalPercent = perks.getBonusPercent(PerkTable.Perks.MENTAL);
+        int socialPercent = perks.getBonusPercent(PerkTable.Perks.SOCIAL);
+
+        // Set the percent in the views
+        physicalPercentView.setText("+" + physicalPercent + "%");
+        mentalPercentView.setText("+" + mentalPercent + "%");
+        socialPercentView.setText("+" + socialPercent + "%");
+    }
 
 // Listeners //
     // when the user taps the up button
@@ -166,37 +168,37 @@ public class Profile extends AppCompatActivity {
         finish();
     }
 
-//    // when the user presses an add point button
-//    public void addPointPhysical(View view) {
-//        addPoint(PerkTable.Perks.PHYSICAL);
-//    }
-//
-//    // when the user presses an add point button
-//    public void addPointMental(View view) {
-//        addPoint(PerkTable.Perks.MENTAL);
-//    }
-//
-//    // when the user presses an add point button
-//    public void addPointSocial(View view) {
-//        addPoint(PerkTable.Perks.SOCIAL);
-//    }
+    // when the user presses an add point button
+    public void addPointPhysical(View view) {
+        addPoint(PerkTable.Perks.PHYSICAL);
+    }
 
-//    // adds a point to a perk
-//    private void addPoint(String perk) {
-//        PerkTable perks = user.getPerkTable();
-//        perks.addPoints(perk, 1);
-//        refreshPerks();
-//    }
+    // when the user presses an add point button
+    public void addPointMental(View view) {
+        addPoint(PerkTable.Perks.MENTAL);
+    }
 
-//    // deletes all user data
-//    public void deleteUserData(View view) {
-//        // delete the data file
-//        deleteFile(QuestLog.DATA_FILE_NAME);
-//        // replace the reference to the old questLog
-//        Home.questLog = null;
-//        Log.d("QuestLog.Android", "Deleted user data");
-//        // restart the app
-//        System.exit(0);
-//    }
+    // when the user presses an add point button
+    public void addPointSocial(View view) {
+        addPoint(PerkTable.Perks.SOCIAL);
+    }
+
+    // adds a point to a perk
+    private void addPoint(String perk) {
+        PerkTable perks = user.getPerkTable();
+        perks.addPoints(perk, 1);
+        refreshPerks();
+    }
+
+    // deletes all user data
+    public void deleteUserData(View view) {
+        // delete the data file
+        deleteFile(QuestLog.DATA_FILE_NAME);
+        // replace the reference to the old questLog
+        Home.questLog = null;
+        Log.d("QuestLog.Android", "Deleted user data");
+        // restart the app
+        System.exit(0);
+    }
 
 }

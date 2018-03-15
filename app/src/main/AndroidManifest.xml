@@ -24,6 +24,8 @@
             android:name=".activity.Profile"
             android:parentActivityName=".activity.Home">
         </activity>
+        <activity android:name=".activity.CreateUser">
+        </activity>
     </application>
 
 </manifest>

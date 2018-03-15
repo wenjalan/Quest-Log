@@ -40,11 +40,11 @@ public class Home extends AppCompatActivity {
 // Constants //
     private static final int ANIMATION_EXP_BAR_DURATION = 1000;
 
+    // Request codes
+    private static final int CREATE_NEW_USER_REQUEST = 0;
+
 // Fields //
     public static QuestLog questLog;
-
-// References //
-    public User user;
 
 // Android Events //
     @Override
@@ -66,7 +66,6 @@ public class Home extends AppCompatActivity {
     protected void onResume() {
         Log.d("QuestLog.Android", "RESUMED activity Home");
         super.onResume();
-        // load();
         render();
     }
 
@@ -76,19 +75,27 @@ public class Home extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // parse the request
+        if (requestCode == CREATE_NEW_USER_REQUEST) {
+            // if it was successful
+            if (resultCode == RESULT_OK) {
+                // get the QuestLog from the intent
+                Bundle bundle = data.getExtras();
+                this.questLog = (QuestLog) bundle.getSerializable("QuestLog");
+            }
+        }
+        else {
+            Log.d("QuestLog.Android", "onActivityResult returned an invalid requestCode!");
+        }
+    }
+
 // Methods //
     // runs on startup
     public void start() {
-        init();
-        render();
-    }
-
-    // initialization
-    private void init() {
-        // load saved data
         load();
-        // get references from the questLog
-        this.user = Home.questLog.getUser();
+        render();
     }
 
     // saves app data to storage
@@ -117,7 +124,7 @@ public class Home extends AppCompatActivity {
         }
     }
 
-    // loads app data from storage
+    // loads app data from storage, returns true if load was successful
     private void load() {
         FileInputStream fileInputStream;
         ObjectInputStream objectInputStream;
@@ -144,13 +151,25 @@ public class Home extends AppCompatActivity {
             Log.d("Home", "Loaded QuestLog from storage");
         } catch (Exception e) {
             e.printStackTrace();
-            Log.d("Home", "Failed to load QuestLog from storage, creating new instance...");
-            this.questLog = new QuestLog("AlphaUser");
+            Log.d("Home", "Failed to load QuestLog from storage, loading CreateUser activity...");
+            createNewUser();
         }
+    }
+
+    // creates a new user
+    private void createNewUser() {
+        Intent i = new Intent(this, CreateUser.class);
+        startActivityForResult(i, CREATE_NEW_USER_REQUEST);
+        this.questLog = (QuestLog) i.getParcelableExtra("QuestLog");
     }
 
     // modifies on-screen content to match internal states
     private void render() {
+        // check if the QuestLog can be rendered
+        if (this.questLog == null) {
+            Log.d("QuestLog.Android", "Failed to render activity Home!");
+            return;
+        }
         // update the user's info bar
         updateUserInfobar();
         // update the list of quests
@@ -168,7 +187,7 @@ public class Home extends AppCompatActivity {
         // get a reference to the TextView
         TextView userLevelTextView = findViewById(R.id.levelText);
         // get a reference to the User's Level
-        Level userLevel = this.user.getLevel();
+        Level userLevel = this.questLog.getUser().getLevel();
         // get the User's current level
         int level = userLevel.getLevel();
         // update the text
@@ -182,7 +201,7 @@ public class Home extends AppCompatActivity {
         // get the current EXP in the bar
         int barProgress = expBar.getProgress();
         // get the user's current progress towards their next level
-        int expProgress = this.user.getLevel().getLevelProgress();
+        int expProgress = this.questLog.getUser().getLevel().getLevelProgress();
 
         // If the progresses are different
         if (barProgress != expProgress) {
@@ -201,7 +220,7 @@ public class Home extends AppCompatActivity {
     // animates the EXP bar gain
     // TODO: Write about this in your writeup
     private void animateExpGain(final ProgressBar expBar, final int finish) {
-        Log.d("QuestLog.Android", "Animating EXP Bar to " + finish);
+        // Create a new animation
         ObjectAnimator animation;
         int current = expBar.getProgress();
 
@@ -213,7 +232,6 @@ public class Home extends AppCompatActivity {
 
         // if this animation should loop back around from 100 to 0
         if (current > finish) {
-            Log.d("QuestLog.Android", "Looping EXP Bar...");
             animation = ObjectAnimator.ofInt(expBar, "progress", 100);
             animation.removeAllListeners();
             animation.addListener(new Animator.AnimatorListener() {
@@ -248,7 +266,7 @@ public class Home extends AppCompatActivity {
         // clear the existing list, if it exists
         clearQuestViews();
         // get the User's QuestList
-        QuestList questList = user.getQuestList();
+        QuestList questList = this.questLog.getUser().getQuestList();
         // iterate through the list
         for (int i = 0; i < questList.quests(); i++) {
             SideQuest quest = questList.getQuest(i);
@@ -370,7 +388,7 @@ public class Home extends AppCompatActivity {
         int questIndex = getQuestIndex(view);
 
         // get a reference to the SideQuest
-        QuestList questList = user.getQuestList();
+        QuestList questList = this.questLog.getUser().getQuestList();
         SideQuest sideQuest = questList.getQuest(questIndex);
 
         // set the Task's status in the backend

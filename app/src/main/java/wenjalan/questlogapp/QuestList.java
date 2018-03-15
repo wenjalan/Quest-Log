@@ -39,7 +39,6 @@ public class QuestList implements Serializable {
             user.getLevel().addExp(exp, perk);
             // remove quest
             questList.remove(quest);
-            Log.d("QuestLog.System", "Rewarding user " + user.getName() + " for SideQuest " + quest.getName() + "...");
         }
         else {
             Log.d("QuestLog.System", "Tried to reward user " + user.getName() + " for SideQuest " + quest.getName() + ", but it wasn't completed");
