@@ -68,6 +68,30 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/userIcon"
+            app:layout_constraintEnd_toStartOf="@+id/userName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/userName"
+            app:srcCompat="@drawable/line" />
+
+        <ImageView
+            android:id="@+id/line1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/userIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/userName"
+            app:layout_constraintTop_toTopOf="@+id/userName"
+            app:srcCompat="@drawable/line" />
+
+        <ImageView
             android:id="@+id/userIcon"
             android:layout_width="128dp"
             android:layout_height="128dp"
@@ -118,6 +142,7 @@
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/expBar" />
+
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
@@ -126,8 +151,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/body-user">
+        app:layout_constraintTop_toBottomOf="@+id/body-user"
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
             android:id="@+id/perksTitle"
@@ -141,6 +168,30 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/line2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/unusedPoints"
+            app:layout_constraintEnd_toStartOf="@+id/perksTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/perksTitle"
+            app:srcCompat="@drawable/line" />
+
+        <ImageView
+            android:id="@+id/line3"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/unusedPoints"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/perksTitle"
+            app:layout_constraintTop_toTopOf="@+id/perksTitle"
+            app:srcCompat="@drawable/line" />
 
         <TextView
             android:id="@+id/unusedPoints"

@@ -9,23 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!-- Home -->
         <activity android:name=".activity.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- CreateQuest -->
         <activity
             android:name=".activity.CreateQuest"
-            android:parentActivityName=".activity.Home">
-        </activity>
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activity.Home" />
+        <!-- Profile -->
         <activity
             android:name=".activity.Profile"
-            android:parentActivityName=".activity.Home">
-        </activity>
-        <activity android:name=".activity.CreateUser">
-        </activity>
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activity.Home" />
+        <!-- CreateUser -->
+        <activity
+            android:name=".activity.CreateUser"
+            android:parentActivityName=".activity.Home" />
     </application>
 
 </manifest>
