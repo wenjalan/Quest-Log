@@ -198,12 +198,14 @@ public class Home extends AppCompatActivity {
         // get the user's current progress towards their next level
         int expProgress = this.questLog.getUser().getLevel().getLevelProgress();
 
-        // If the progresses are different
+        // If the progresses are different or the user has leveled up
         if (barProgress != expProgress) {
+            Log.d("QuestLog.Android", "Animating EXP bar...");
             // if the user leveled up
             if (barProgress > expProgress) {
-                // if the bar's progress is more than the exp's progress, signaling a levelup
+                // animate the bar to 100
                 animateExpGain(expBar, 100);
+                // animate the bar to the finish
                 animateExpGain(expBar, expProgress);
             }
             else {
