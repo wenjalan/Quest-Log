@@ -1,8 +1,8 @@
 <resources>
     <!-- Global Strings -->
-    <string name="app_name">Quest Log Beta</string>
+    <string name="app_name">Quest Log Alpha</string>
     <string name="appVersion">1.0</string>
-    <string name="username">Beta User</string>
+    <string name="username">Alpha User</string>
 
     <!-- Home -->
     <string name="textLevel">Level 0</string>
