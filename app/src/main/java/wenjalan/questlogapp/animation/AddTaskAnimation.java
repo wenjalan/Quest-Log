@@ -29,8 +29,7 @@ public class AddTaskAnimation extends Animation {
         view.setVisibility(View.VISIBLE);
 
         // set the duration
-        int duration = (int) (finalHeight / view.getContext().getResources().getDisplayMetrics().density);
-        setDuration(duration);
+        setDuration(QuestLogAnimation.DURATION_SHORT);
     }
 
     @Override

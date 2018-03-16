@@ -76,7 +76,6 @@
             android:paddingBottom="0dp"
             android:paddingHorizontal="16dp"
             android:paddingTop="16dp"
-            android:animateLayoutChanges="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

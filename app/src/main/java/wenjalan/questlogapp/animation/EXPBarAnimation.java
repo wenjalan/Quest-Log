@@ -15,6 +15,9 @@ public class EXPBarAnimation extends Animation {
         this.expBar = expBar;
         this.finish = finish;
         this.start = start;
+
+        // set the duration
+        setDuration(QuestLogAnimation.DURATION_LONG);
     }
 
     @Override

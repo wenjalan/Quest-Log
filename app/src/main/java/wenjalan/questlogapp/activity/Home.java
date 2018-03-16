@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -29,6 +30,8 @@ import wenjalan.questlogapp.QuestLog;
 import wenjalan.questlogapp.R;
 import wenjalan.questlogapp.SideQuest;
 import wenjalan.questlogapp.Task;
+import wenjalan.questlogapp.animation.QuestLogAnimation;
+import wenjalan.questlogapp.animation.RemoveQuestAnimation;
 
 public class Home extends AppCompatActivity {
 
@@ -204,6 +207,8 @@ public class Home extends AppCompatActivity {
             if (barProgress > expProgress) {
                 // animate the bar to 100
                 animateExpGain(expBar, 100);
+                // play the levelup animation
+                animateLevelUp();
                 // animate the bar to the finish
                 animateExpGain(expBar, expProgress);
             }
@@ -252,9 +257,14 @@ public class Home extends AppCompatActivity {
         }
 
         // start the animation
-        animation.setDuration(ANIMATION_EXP_BAR_DURATION);
+        animation.setDuration(QuestLogAnimation.DURATION_LONG);
         animation.setInterpolator(new DecelerateInterpolator());
         animation.start();
+    }
+
+    // plays the animation for a levelup
+    private void animateLevelUp() {
+        
     }
 
     // updates the questListLinearLayout with all SideQuest instances
@@ -286,8 +296,6 @@ public class Home extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         // create a new View to hold the SideQuest in
         View questView = inflater.inflate(R.layout.home_sidequest, questList, false);
-        // add the view to the list
-        questList.addView(questView);
 
         // title
         displayQuestTitle(questView, sideQuest.getName());
@@ -304,6 +312,8 @@ public class Home extends AppCompatActivity {
         // tasks
         displayQuestTasks(questView, inflater, sideQuest);
 
+        // add the view to the list
+        questList.addView(questView);
     }
 
     // displays the title of a Quest
@@ -399,8 +409,32 @@ public class Home extends AppCompatActivity {
 
         // refresh homepage if SideQuest complete
         if (sideQuest.isComplete()) {
-            render();
+            // animate the removal of the SideQuest
+            LinearLayout questsLayout = (LinearLayout) findViewById(R.id.questsLayout);
+            View sideQuestView = questsLayout.getChildAt(questIndex);
+            animateRemoveSideQuestView(sideQuestView);
         }
+    }
+
+    // animates the removal of a Side Quest View
+    private void animateRemoveSideQuestView(View questView) {
+        Log.d("QuestLog.Animation", "Starting SideQuest Removal Animation...");
+        RemoveQuestAnimation a = new RemoveQuestAnimation(questView);
+        // refresh the homepage on animation end
+        a.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                // refresh the homepage
+                render();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
+        questView.startAnimation(a);
     }
 
     // returns the Task index of a Task given its checkbox

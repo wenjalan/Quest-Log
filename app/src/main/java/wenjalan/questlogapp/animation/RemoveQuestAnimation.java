@@ -5,16 +5,18 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
-public class RemoveTaskAnimation extends Animation {
+public class RemoveQuestAnimation extends Animation {
 
     private View view;
     private int startHeight;
 
-    public RemoveTaskAnimation(View view) {
+    public RemoveQuestAnimation(View view) {
         this.view = view;
-        this.startHeight = 192;
 
-        // copied from AddTaskAnimation
+        // measure the height of the view
+        startHeight = view.getMeasuredHeight();
+        Log.d("QuestLog.Android", "Got measured height of " + startHeight);
+
         // set the duration
         setDuration(QuestLogAnimation.DURATION_SHORT);
     }
@@ -27,6 +29,7 @@ public class RemoveTaskAnimation extends Animation {
         else {
             int newHeight = startHeight - (int) (startHeight * interpolatedTime);
             view.getLayoutParams().height = newHeight;
+            Log.d("QuestLog.Animation", "Set height of view to " + newHeight);
             view.requestLayout();
         }
     }
@@ -35,5 +38,4 @@ public class RemoveTaskAnimation extends Animation {
     public boolean willChangeBounds() {
         return true;
     }
-
 }
