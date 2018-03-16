@@ -28,6 +28,7 @@
         android:hint="@string/hintTask"
         android:inputType="textPersonName"
         android:textSize="18sp"
+        android:maxLength="50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/delete"
         app:layout_constraintStart_toEndOf="@+id/taskId"

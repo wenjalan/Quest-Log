@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import wenjalan.questlogapp.QuestLog;
 import wenjalan.questlogapp.R;
@@ -35,17 +36,7 @@ public class CreateUser extends AppCompatActivity {
         EditText field = findViewById(R.id.userNameField);
         String username = field.getText().toString();
 
-        // check for errors
-        boolean problematic = checkNameForErrors(username);
-
-        // if the username was problematic
-        if (problematic) {
-            // show an error
-            // TODO: that
-            return;
-        }
-
-        // create the user and put it in an intent
+        // create the user's questlog and put it in an intent
         this.questLog = new QuestLog(username);
         Intent rIntent = new Intent();
         rIntent.putExtra("QuestLog", this.questLog);
@@ -53,17 +44,6 @@ public class CreateUser extends AppCompatActivity {
         // send back the new QuestLog
         setResult(RESULT_OK, rIntent);
         finish();
-    }
-
-    // checks if the username is error prone, returns true if there was an error
-    private boolean checkNameForErrors(String name) {
-        if (name.length() > USERNAME_MAX_CHAR_LENGTH) {
-            Log.d("QuestLog.Android", "Error parsing username: Username is too long");
-            return true;
-        }
-        else {
-            return false;
-        }
     }
 
 

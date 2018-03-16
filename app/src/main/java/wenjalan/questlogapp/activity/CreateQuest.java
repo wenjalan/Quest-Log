@@ -4,6 +4,7 @@ package wenjalan.questlogapp.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -290,6 +292,7 @@ public class CreateQuest extends AppCompatActivity {
         // check if the title is empty
         if (questTitle.isEmpty()) {
             Log.d("QuestLog.Android", "Failed to create quest: Invalid title");
+            showError("Invalid title");
             return;
         }
 
@@ -300,6 +303,7 @@ public class CreateQuest extends AppCompatActivity {
         // check if the description is empty
         if (questDesc.isEmpty()) {
             Log.d("QuestLog.Android", "Failed to create quest: Invalid description");
+            showError("Invalid description");
             return;
         }
 
@@ -309,18 +313,32 @@ public class CreateQuest extends AppCompatActivity {
             questExp = Integer.valueOf(expField.getText().toString());
         } catch (NumberFormatException e) {
             Log.d("QuestLog.Android", "Failed to create quest: non-integer value " + expField.getText().toString() + " as an EXP reward");
+            showError("Invalid EXP");
             return;
         }
 
-        // check if the amount of exp is negative
-        if (questExp < 0) {
+        // check if the amount of exp is negative or 0
+        if (questExp <= 0) {
             Log.d("QuestLog.Android", "Failed to create quest: EXP reward < 0");
+
+            // show error feedback to user
+            TextInputLayout layout = (TextInputLayout) this.findViewById(R.id.expFieldLayout);
+            layout.setHint(null);
+            layout.setError("EXP reward must be more than 0");
+
             return;
         }
 
         // check if the amount of exp is greater than one level's worth of exp
         if (questExp > this.user.getLevel().getExpToNextLevel()) {
             Log.d("QuestLog.Android", "Failed to create quest: EXP reward exceeds max cap");
+
+            // show error feedback to user
+            TextInputLayout layout = (TextInputLayout) this.findViewById(R.id.expFieldLayout);
+            int maxExp = questLog.getUser().getLevel().getExpToNextLevel();
+            layout.setHint(null);
+            layout.setError("Max: " + maxExp);
+
             return;
         }
 
@@ -333,6 +351,7 @@ public class CreateQuest extends AppCompatActivity {
             questTasks = getTasksFromFields();
         } catch (IllegalArgumentException e) {
             Log.d("QuestLog.Android", "Failed to create quest: " + e.getMessage());
+            showError("Invalid Task");
             return;
         }
 
@@ -361,6 +380,12 @@ public class CreateQuest extends AppCompatActivity {
         // close this activity
         Log.d("QuestLog.Android", "SideQuest" + quest.getName() + " created, closing activity...");
         finish();
+    }
+
+    // shows an error to the user via a Toast
+    private void showError(String error) {
+        Toast toast = Toast.makeText(this, error, Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     // returns the Perk chosen in a given Spinner
