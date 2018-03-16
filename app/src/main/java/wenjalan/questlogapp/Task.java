@@ -27,14 +27,14 @@ public class Task implements Completable, Serializable {
     // completes this Task
     public void complete() {
         this.isComplete = true;
-        Log.d("QuestLog.System", "Completed task \"" + this.description + "\"");
+        Log.d("QuestLog.System", "Completed Task \"" + this.description + "\"");
 
     }
 
     // uncompletes this TAsk
     public void uncomplete() {
         this.isComplete = false;
-        Log.d("QuestLog.System", "Uncompleted task \"" + this.description + "\"");
+        Log.d("QuestLog.System", "Uncompleted Task \"" + this.description + "\"");
     }
 
 // Getters //

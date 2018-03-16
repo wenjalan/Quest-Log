@@ -2,129 +2,281 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/createQuestBackground"
+    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@color/colorBackground">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/createQuestNavigationBar"
+        android:id="@+id/navigationBar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:alpha="1"
+        android:background="@color/colorPrimary">
 
         <TextView
-            android:id="@+id/createQuestTitle"
-            android:layout_width="0dp"
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="64dp"
             android:layout_marginTop="8dp"
-            android:text="New Quest"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
+            android:text="@string/textCreateQuest"
+            android:textColor="@color/colorBackground"
+            android:textSize="36sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/backButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/upButton"
-            android:layout_width="0dp"
+            android:id="@+id/backButton"
+            android:layout_width="64dp"
             android:layout_height="0dp"
-            android:background="?attr/selectableItemBackground"
+            android:background="@null"
             android:onClick="navigationUp"
-            android:src="@drawable/ic_arrow_back_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/createQuestTitle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_keyboard_arrow_left_white_24dp"
+            tools:ignore="ContentDescription" />
     </android.support.constraint.ConstraintLayout>
 
-    <ScrollView
-        android:id="@+id/questFieldsScrollView"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/body"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createQuestNavigationBar">
+        app:layout_constraintTop_toBottomOf="@+id/navigationBar"
+        app:layout_constraintVertical_bias="0.0">
 
-        <LinearLayout
-            android:id="@+id/questFieldsLinearLayout"
-            android:layout_width="match_parent"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/createQuestActionButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/colorBackground"
+            android:onClick="createQuest"
+            android:src="@drawable/ic_done_black_24dp"
+            app:backgroundTint="@color/colorPrimary"
+            app:borderWidth="1dp"
+            app:elevation="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-            <EditText
-                android:id="@+id/questTitleField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Quest Title"
-                android:inputType="textCapWords" />
-
-            <EditText
-                android:id="@+id/questDescField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Quest Description"
-                android:inputType="textMultiLine" />
-
-            <LinearLayout
-                android:id="@+id/questPerkExpLinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/questExpField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="EXP Reward"
-                    android:inputType="number" />
-
-                <Spinner
-                    android:id="@+id/perkSpinner"
-                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
+        <ScrollView
+            android:id="@+id/fieldScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:id="@+id/questTasksLinearLayout"
+                android:id="@+id/fieldsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/titleConstraint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/titleField"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="@string/hintTitle"
+                        android:inputType="textCapWords"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:maxLength="30"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/titlePrompt"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/titlePrompt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:text="@string/textTitle"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/titleField"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/descriptionConstraint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/descriptionPrompt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/textDescription"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/descriptionField"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/descriptionField" />
+
+                    <EditText
+                        android:id="@+id/descriptionField"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:ems="10"
+                        android:hint="@string/hintDescription"
+                        android:inputType="textMultiLine"
+                        android:textSize="14sp"
+                        android:textStyle="italic"
+                        android:maxLength="300"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/descriptionPrompt"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/tasksConstraint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/taskFieldsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toTopOf="@+id/addTaskButton"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" >
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/addTaskButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:background="@null"
+                        android:onClick="addTaskView"
+                        android:paddingLeft="32dp"
+                        android:paddingRight="32dp"
+                        android:text="@string/buttonAddTask"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/rewardsConstraint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <TextView
+                        android:id="@+id/expPrompt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_weight="1"
+                        android:text="@string/textExp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/expFieldLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        app:errorEnabled="true"
+                        app:layout_constraintEnd_toStartOf="@+id/perkSpinner"
+                        app:layout_constraintStart_toEndOf="@+id/expPrompt"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/expField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hintExpReward"
+                            android:inputType="number"
+                            android:maxLength="8"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="18sp"
+                            android:textStyle="italic" />
+                    </android.support.design.widget.TextInputLayout>
+                    <!--
+                    <EditText
+                        android:id="@+id/expField"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="@string/hintExpReward"
+                        android:inputType="number"
+                        android:maxLength="8"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="italic"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/expPrompt"
+                        app:layout_constraintEnd_toStartOf="@+id/perkSpinner"
+                        app:layout_constraintStart_toEndOf="@+id/expPrompt" /> -->
+
+                    <Spinner
+                        android:id="@+id/perkSpinner"
+                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_weight="1"
+                        app:layout_constraintBottom_toBottomOf="@+id/expPrompt"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/expPrompt" />
+
+                </android.support.constraint.ConstraintLayout>
+
             </LinearLayout>
 
-            <Button
-                android:id="@+id/questAddTaskButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="addTaskView"
-                android:text="Add Another Task" />
+        </ScrollView>
 
-            <Button
-                android:id="@+id/questCreateButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="createQuest"
-                android:text="Create Quest"
-                android:textStyle="bold" />
+    </android.support.constraint.ConstraintLayout>
 
-        </LinearLayout>
-    </ScrollView>
 </android.support.constraint.ConstraintLayout>

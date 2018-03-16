@@ -106,11 +106,13 @@ public class Profile extends AppCompatActivity {
         refreshPerks();
     }
 
-    // refreshes the user's username on the activity
+    // refreshes the username field
     private void refreshName() {
-        TextView userNameView = findViewById(R.id.profileUserName);
-        String userName = user.getName();
-        userNameView.setText(userName);
+        // Get the username
+        String username = questLog.getUser().getName();
+        // Set the name
+        TextView nameField = findViewById(R.id.userName);
+        nameField.setText(username);
     }
 
     // refreshes the user's Level aspects, the level text and the bar
@@ -119,18 +121,18 @@ public class Profile extends AppCompatActivity {
         Level level = user.getLevel();
 
         // TextView field
-        TextView levelTextView = findViewById(R.id.profileUserLevel);
+        TextView levelTextView = this.findViewById(R.id.level);
         int userLevel = user.getLevel().getLevel();
         levelTextView.setText("Level " + userLevel);
 
         // EXP Text
-        TextView expText = findViewById(R.id.profileExpText);
+        TextView expText = this.findViewById(R.id.expProgress);
         int cExp = level.getExp();
         int lExp = level.getExpToNextLevel();
         expText.setText("" + cExp + "/" + lExp);
 
         // EXP Bar
-        ProgressBar expBar = findViewById(R.id.profileUserExpBar);
+        ProgressBar expBar = this.findViewById(R.id.expBar);
         int progress = level.getLevelProgress();
         expBar.setProgress(progress);
     }
@@ -140,14 +142,14 @@ public class Profile extends AppCompatActivity {
         // get the PerkTable
         PerkTable perks = user.getPerkTable();
         // unused points text
-        TextView unusedPointsView = findViewById(R.id.profileUnusedPerkPoints);
+        TextView unusedPointsView = findViewById(R.id.unusedPoints);
         int points = perks.getPointsIn(PerkTable.Perks.UNUSED);
-        unusedPointsView.setText("Unused Perk Points: " + points);
+        unusedPointsView.setText("Unused Points: " + points);
 
         // percentages
-        TextView physicalPercentView = findViewById(R.id.profilePhysicalPointText);
-        TextView mentalPercentView = findViewById(R.id.profileMentalPointText);
-        TextView socialPercentView = findViewById(R.id.profileSocialPointText);
+        TextView physicalPercentView = findViewById(R.id.bonusPhysical);
+        TextView mentalPercentView = findViewById(R.id.bonusMental);
+        TextView socialPercentView = findViewById(R.id.bonusSocial);
 
         // get the percent bonuses from PerkTable
         int physicalPercent = perks.getBonusPercent(PerkTable.Perks.PHYSICAL);

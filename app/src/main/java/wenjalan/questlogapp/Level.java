@@ -65,8 +65,14 @@ public class Level implements Serializable {
             levelUps++;
         }
 
-        Log.d("QuestLog.System", "Granted user " + user.getName() + " " + exp + " EXP (BASE: " + sourceExp + ", BONUS: " + bonusExp + ")");
-        Log.d("QuestLog.System", "Leveled up " + levelUps + " times.");
+        // print the exp gain
+        Log.d("QuestLog.System", "Granted user " + user.getName() + " " + exp + " EXP (" + bonusExp + " BONUS)");
+
+        // print the levelups
+        while (levelUps > 0) {
+            Log.d("QuestLog.System", "User leveled up (" + (this.getLevel() - 1) + " -> " + this.getLevel() + ")");
+            levelUps--;
+        }
     }
 
     // returns the amount of exp from the perk bonus
@@ -102,7 +108,8 @@ public class Level implements Serializable {
 
     // returns the progress towards the next level as a percent
     public int getLevelProgress() {
-        return (int) ((double) this.userExperience / (double) this.nextLevelExperience * 100);
+        double progress = (double) this.getExp() / (double) this.getExpToNextLevel();
+        return (int) (100.0 * progress);
     }
 
     // returns the owner of this Level

@@ -1,5 +1,43 @@
 <resources>
-    <string name="app_name">Quest Log Alpha</string>
-    <string name="userLevelDefault">Level X</string>
-    <string name="hello_world">Hello world!</string>
+    <!-- Global Strings -->
+    <string name="app_name">Quest Log Beta</string>
+    <string name="appVersion">1.0</string>
+    <string name="username">Beta User</string>
+
+    <!-- Home -->
+    <string name="textLevel">Level 0</string>
+    <string name="textQuestTitle">Quest Title</string>
+    <string name="textQuestDescription">Quest Description</string>
+    <string name="textQuestTaskDescription">Task Description</string>
+    <string name="textExpReward">0 EXP</string>
+
+    <!-- Create User -->
+    <string name="hintUserName">Username</string>
+    <string name="buttonCreateUser">Create User</string>
+
+    <!-- Create Quest -->
+    <string name="textCreateQuest">Create Quest</string>
+    <string name="textTitle">Title</string>
+    <string name="hintTitle">Internal Affairs</string>
+    <string name="textDescription">Description</string>
+    <string name="hintDescription">Apply for a summer internship!</string>
+    <string name="buttonAddTask">Add Task</string>
+    <string name="textTask">Task 0</string>
+    <string name="textExp">EXP Reward</string>
+    <string name="textPerkCategory">Category</string>
+    <string name="taskId">Task 0</string>
+    <string name="hintTask">Create a resume</string>
+    <string name="hintExpReward">100</string>
+
+    <!-- Profile -->
+    <string name="textProfile">Profile</string>
+    <string name="textExpProgress">000/000</string>
+    <string name="textPerks">Perks</string>
+    <string name="textUnusedPoints">Unused Points: 0</string>
+    <string name="textPerkPhysical">Physical</string>
+    <string name="textPerkMental">Mental</string>
+    <string name="textPerkSocial">Social</string>
+    <string name="textBonusPercent">+0%</string>
+    <string name="buttonAddPoint">Add Point</string>
+
 </resources>
