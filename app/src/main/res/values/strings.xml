@@ -14,16 +14,20 @@
     <!-- Create User -->
     <string name="hintUserName">Username</string>
     <string name="buttonCreateUser">Create User</string>
+
+    <!-- Create Quest -->
+    <string name="textCreateQuest">Create Quest</string>
     <string name="textTitle">Title</string>
     <string name="hintTitle">Internal Affairs</string>
     <string name="textDescription">Description</string>
     <string name="hintDescription">Apply for a summer internship!</string>
+    <string name="buttonAddTask">Add Task</string>
     <string name="textTask">Task 0</string>
-    <string name="textExp">EXP</string>
+    <string name="textExp">EXP Reward</string>
     <string name="textPerkCategory">Category</string>
-
-    <!-- Create Quest -->
-    <string name="textCreateQuest">Create Quest</string>
+    <string name="taskId">Task 0</string>
+    <string name="hintTask">Create a resume</string>
+    <string name="hintExpReward">100</string>
 
     <!-- Profile -->
     <string name="textProfile">Profile</string>
