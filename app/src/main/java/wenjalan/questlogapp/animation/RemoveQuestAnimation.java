@@ -15,7 +15,6 @@ public class RemoveQuestAnimation extends Animation {
 
         // measure the height of the view
         startHeight = view.getMeasuredHeight();
-        Log.d("QuestLog.Android", "Got measured height of " + startHeight);
 
         // set the duration
         setDuration(QuestLogAnimation.DURATION_SHORT);
@@ -29,7 +28,6 @@ public class RemoveQuestAnimation extends Animation {
         else {
             int newHeight = startHeight - (int) (startHeight * interpolatedTime);
             view.getLayoutParams().height = newHeight;
-            Log.d("QuestLog.Animation", "Set height of view to " + newHeight);
             view.requestLayout();
         }
     }

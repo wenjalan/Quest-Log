@@ -264,7 +264,7 @@ public class Home extends AppCompatActivity {
 
     // plays the animation for a levelup
     private void animateLevelUp() {
-        
+
     }
 
     // updates the questListLinearLayout with all SideQuest instances
@@ -418,7 +418,6 @@ public class Home extends AppCompatActivity {
 
     // animates the removal of a Side Quest View
     private void animateRemoveSideQuestView(View questView) {
-        Log.d("QuestLog.Animation", "Starting SideQuest Removal Animation...");
         RemoveQuestAnimation a = new RemoveQuestAnimation(questView);
         // refresh the homepage on animation end
         a.setAnimationListener(new Animation.AnimationListener() {
