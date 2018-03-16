@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -30,6 +31,8 @@ import wenjalan.questlogapp.R;
 import wenjalan.questlogapp.SideQuest;
 import wenjalan.questlogapp.Task;
 import wenjalan.questlogapp.User;
+import wenjalan.questlogapp.animation.AddTaskAnimation;
+import wenjalan.questlogapp.animation.RemoveTaskAnimation;
 
 public class CreateQuest extends AppCompatActivity {
 
@@ -221,6 +224,12 @@ public class CreateQuest extends AppCompatActivity {
         // add the recent most view in the LinearLayout
         taskList.addView(taskViews.get(taskViews.size() - 1));
 
+        // set the visibility to no
+        taskView.setVisibility(View.GONE);
+
+        // animate it
+        animateAddTaskView(taskView);
+
         // change the task's id to match the arraylist
         updateTaskId(taskView);
 
@@ -231,6 +240,12 @@ public class CreateQuest extends AppCompatActivity {
         Log.d("QuestLog.Android", "Added a Task field");
     }
 
+    // animates the adding of a Task View
+    private void animateAddTaskView(View view) {
+        AddTaskAnimation a = new AddTaskAnimation(view);
+        view.startAnimation(a);
+    }
+
     // called when the user taps a Delete Button on a Task Field
     public void destroyTaskField(View view) {
         // Get the LinearLayout of Tasks Views
@@ -238,19 +253,47 @@ public class CreateQuest extends AppCompatActivity {
         // if this view isn't the last view in the list
         if (taskViews.size() > 1) {
             // Grab the entire task field the button's from
-            View field = (View) view.getParent();
+            View taskView = (View) view.getParent();
+            // Get the index of the Task we're removing
+            int id = taskViews.indexOf(taskView);
             // Remove the field from the taskViews ArrayList (using the view itself)
-            taskViews.remove(field);
-            // Delete the entire Task view
-            // TODO: Animate it
-            tasksList.removeView(field);
-            // update the task ids
-            updateTaskIds();
-            Log.d("QuestLog.Android", "Removed a Task field");
+            taskViews.remove(taskView);
+            // animate it, also removes it from taskFieldsLayout afterwards and updates IDs
+            animateRemoveTaskView(taskView);
+            // Log
+            Log.d("QuestLog.Android", "Removed Task View " + id);
         }
         else {
-            Log.d("QuestLog.Android", "Couldn't remove Task field, it's the last one");
+            Log.d("QuestLog.Android", "Couldn't remove Task View, it's the last one");
         }
+    }
+
+    // animates the removal of a Task View
+    private void animateRemoveTaskView(final View view) {
+        RemoveTaskAnimation a = new RemoveTaskAnimation(view);
+        // remove the view from the layout and update the ids once the animation finishes
+        a.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                // remove it from the taskFieldsLayout
+                // TODO: Fix?
+                ((LinearLayout) findViewById(R.id.taskFieldsLayout)).removeView((View) view.getParent());
+                // update the task ids
+                updateTaskIds();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        // start the animation
+        view.startAnimation(a);
     }
 
     // updates the ids of all tasks current in the layout

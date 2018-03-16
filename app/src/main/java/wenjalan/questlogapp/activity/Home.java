@@ -200,7 +200,6 @@ public class Home extends AppCompatActivity {
 
         // If the progresses are different or the user has leveled up
         if (barProgress != expProgress) {
-            Log.d("QuestLog.Android", "Animating EXP bar...");
             // if the user leveled up
             if (barProgress > expProgress) {
                 // animate the bar to 100
