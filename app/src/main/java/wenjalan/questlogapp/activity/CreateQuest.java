@@ -119,6 +119,11 @@ public class CreateQuest extends AppCompatActivity {
         createTaskFields();
         createPerkSpinner();
 
+        // update the max exp reward text
+        EditText expField = findViewById(R.id.expField);
+        int maxExp = questLog.getUser().getLevel().getExpToNextLevel();
+        expField.setHint("" + maxExp);
+
         // check if we need to load a quest to edit
         Intent i = this.getIntent();
         int editQuestIndex = i.getIntExtra("LoadQuestAtIndex", -1);
