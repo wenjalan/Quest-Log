@@ -372,7 +372,7 @@ public class CreateQuest extends AppCompatActivity {
             return;
         }
 
-        // check if the amount of exp is greater than one level's worth of exp
+        // check if the amount of exp is greater than one level's worth of exp (minus 1 to avoid animation errors)
         if (questExp > this.user.getLevel().getExpToNextLevel()) {
             Log.d("QuestLog.Android", "Failed to create quest: EXP reward exceeds max cap");
 

@@ -43,6 +43,7 @@ public class Home extends AppCompatActivity {
 
 // Fields //
     public static QuestLog questLog;
+    private boolean animateBar;
 
 // Android Events //
     @Override
@@ -50,6 +51,8 @@ public class Home extends AppCompatActivity {
         Log.d("QuestLog.Android", "CREATED activity Home");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        // set the animation flag
+        this.animateBar = true;
         start();
     }
 
@@ -64,6 +67,7 @@ public class Home extends AppCompatActivity {
     protected void onResume() {
         Log.d("QuestLog.Android", "RESUMED activity Home");
         super.onResume();
+        this.animateBar = false;
         render();
     }
 
@@ -201,18 +205,17 @@ public class Home extends AppCompatActivity {
         // get the user's current progress towards their next level
         int expProgress = this.questLog.getUser().getLevel().getLevelProgress();
 
-        // If the progresses are different or the user has leveled up
-        if (barProgress != expProgress) {
+        // If we're not just resuming the activity
+        if (animateBar) {
             // if the user leveled up
-            if (barProgress > expProgress) {
+            if (barProgress >= expProgress) {
+                Log.d("QuestLog.Animation", "Animating levelup EXP gain");
                 // animate the bar to 100
-                animateExpGain(expBar, 100);
-                // play the levelup animation
-                animateLevelUp();
-                // animate the bar to the finish
                 animateExpGain(expBar, expProgress);
+                animateLevelUp();
             }
             else {
+                Log.d("QuestLog.Animation", "Animating regular EXP gain");
                 animateExpGain(expBar, expProgress);
             }
         }
@@ -225,14 +228,8 @@ public class Home extends AppCompatActivity {
         ObjectAnimator animation;
         int current = expBar.getProgress();
 
-        // if the bar is full
-        if (current >= 100) {
-            expBar.setProgress(0);
-            current = 0;
-        }
-
         // if this animation should loop back around from 100 to 0
-        if (current > finish) {
+        if (current >= finish) {
             animation = ObjectAnimator.ofInt(expBar, "progress", 100);
             animation.removeAllListeners();
             animation.addListener(new Animator.AnimatorListener() {
@@ -241,6 +238,10 @@ public class Home extends AppCompatActivity {
 
                 @Override
                 public void onAnimationEnd(Animator animator) {
+                    // if the bar is full
+                    if (expBar.getProgress() >= 100) {
+                        expBar.setProgress(0);
+                    }
                     animateExpGain(expBar, finish);
                 }
 
@@ -413,6 +414,8 @@ public class Home extends AppCompatActivity {
             LinearLayout questsLayout = (LinearLayout) findViewById(R.id.questsLayout);
             View sideQuestView = questsLayout.getChildAt(questIndex);
             animateRemoveSideQuestView(sideQuestView);
+            // set the animation flag
+            this.animateBar = true;
         }
     }
 
