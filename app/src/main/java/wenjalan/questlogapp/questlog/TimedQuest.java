@@ -1,8 +1,5 @@
 package wenjalan.questlogapp.questlog;
-
-/**
- * Created by Alan on 3/28/2018.
- */
+// A timed Quest, needs to be completed before a certain Timestamp
 
 public class TimedQuest extends SideQuest {
 
