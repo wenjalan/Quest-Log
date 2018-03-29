@@ -18,6 +18,7 @@ public class SideQuest implements Completable, Serializable {
     private String perkCategory;            // what Perk this SideQuest belongs to
     private boolean isComplete;             // whether or not this SideQuest is complete
     private ArrayList<Task> tasks;          // the list of Tasks to complete this SideQuest
+    private Timestamp timestamp;
 
 // Constructor //
     /* public SideQuest(QuestList questList, String name, String description, int expReward) {
@@ -63,6 +64,7 @@ public class SideQuest implements Completable, Serializable {
         this.perkCategory = null;
         this.isComplete = false;
         this.tasks = new ArrayList<Task>();
+        this.timestamp = new Timestamp();
     }
 
     // completes this SideQuest
@@ -161,6 +163,11 @@ public class SideQuest implements Completable, Serializable {
     // returns the Perk this SideQuest is associated with
     public String getPerkCategory() {
         return this.perkCategory;
+    }
+
+    // returns the Timestamp of when this quest was created
+    public Timestamp getCreationTimestamp() {
+        return this.timestamp;
     }
 
     // returns whether this SideQuest has been completed (all Tasks completed)

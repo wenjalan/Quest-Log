@@ -39,6 +39,27 @@ public class Timestamp {
         int minute = calendar.get(Calendar.MINUTE);
     }
 
+// Getters //
+    public int getYear() {
+        return year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
     // toString
     @Override
     public String toString() {
