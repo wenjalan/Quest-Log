@@ -24,12 +24,12 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import wenjalan.questlogapp.Level;
-import wenjalan.questlogapp.QuestList;
-import wenjalan.questlogapp.QuestLog;
+import wenjalan.questlogapp.questlog.Level;
+import wenjalan.questlogapp.questlog.QuestList;
+import wenjalan.questlogapp.questlog.QuestLog;
 import wenjalan.questlogapp.R;
-import wenjalan.questlogapp.SideQuest;
-import wenjalan.questlogapp.Task;
+import wenjalan.questlogapp.questlog.SideQuest;
+import wenjalan.questlogapp.questlog.Task;
 import wenjalan.questlogapp.animation.QuestLogAnimation;
 import wenjalan.questlogapp.animation.RemoveQuestAnimation;
 

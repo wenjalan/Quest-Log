@@ -1,4 +1,4 @@
-package wenjalan.questlogapp;
+package wenjalan.questlogapp.questlog;
 
 import android.util.Log;
 

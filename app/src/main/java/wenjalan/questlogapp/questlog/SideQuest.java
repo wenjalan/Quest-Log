@@ -1,4 +1,4 @@
-package wenjalan.questlogapp;
+package wenjalan.questlogapp.questlog;
 // Represents a SideQuest within a QuestList
 
 import android.util.Log;

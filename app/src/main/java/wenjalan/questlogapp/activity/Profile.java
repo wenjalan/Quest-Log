@@ -1,11 +1,7 @@
 package wenjalan.questlogapp.activity;
 // Activity used to display the user's stats and perks
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,15 +9,14 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
-import wenjalan.questlogapp.Level;
-import wenjalan.questlogapp.PerkTable;
-import wenjalan.questlogapp.QuestLog;
+import wenjalan.questlogapp.questlog.Level;
+import wenjalan.questlogapp.questlog.PerkTable;
+import wenjalan.questlogapp.questlog.QuestLog;
 import wenjalan.questlogapp.R;
-import wenjalan.questlogapp.User;
+import wenjalan.questlogapp.questlog.User;
 
 public class Profile extends AppCompatActivity {
 

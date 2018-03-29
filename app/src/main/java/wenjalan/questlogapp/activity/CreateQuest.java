@@ -10,8 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -23,14 +21,13 @@ import android.widget.Toast;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
-import wenjalan.questlogapp.PerkTable;
-import wenjalan.questlogapp.QuestLog;
+import wenjalan.questlogapp.questlog.PerkTable;
+import wenjalan.questlogapp.questlog.QuestLog;
 import wenjalan.questlogapp.R;
-import wenjalan.questlogapp.SideQuest;
-import wenjalan.questlogapp.Task;
-import wenjalan.questlogapp.User;
+import wenjalan.questlogapp.questlog.SideQuest;
+import wenjalan.questlogapp.questlog.Task;
+import wenjalan.questlogapp.questlog.User;
 import wenjalan.questlogapp.animation.AddTaskAnimation;
 import wenjalan.questlogapp.animation.RemoveTaskAnimation;
 

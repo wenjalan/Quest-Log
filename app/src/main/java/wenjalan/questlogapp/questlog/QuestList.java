@@ -1,4 +1,4 @@
-package wenjalan.questlogapp;
+package wenjalan.questlogapp.questlog;
 // Represents a User's list of quests
 
 import android.util.Log;

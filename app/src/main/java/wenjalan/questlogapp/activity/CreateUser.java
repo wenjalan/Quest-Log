@@ -6,9 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import wenjalan.questlogapp.QuestLog;
+import wenjalan.questlogapp.questlog.QuestLog;
 import wenjalan.questlogapp.R;
 
 public class CreateUser extends AppCompatActivity {

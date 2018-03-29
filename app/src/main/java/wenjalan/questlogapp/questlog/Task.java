@@ -1,4 +1,4 @@
-package wenjalan.questlogapp;
+package wenjalan.questlogapp.questlog;
 // Represents a single subTask of a SideQuest
 
 import android.util.Log;

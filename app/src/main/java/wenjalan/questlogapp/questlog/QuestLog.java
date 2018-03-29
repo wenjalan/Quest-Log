@@ -1,8 +1,6 @@
-package wenjalan.questlogapp;
+package wenjalan.questlogapp.questlog;
 // Represents an instance of the app
 // Owns the instance of User
-
-import android.util.Log;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package wenjalan.questlogapp;
+package wenjalan.questlogapp.questlog;
 // Represents the User's Perks and their values
 
 import android.util.Log;

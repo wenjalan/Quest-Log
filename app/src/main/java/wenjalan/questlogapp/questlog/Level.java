@@ -1,4 +1,4 @@
-package wenjalan.questlogapp;
+package wenjalan.questlogapp.questlog;
 // Represents a User's Level and EXP system
 
 import android.util.Log;
