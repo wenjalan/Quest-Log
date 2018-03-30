@@ -69,7 +69,7 @@ public class SideQuest implements Completable, Serializable {
 
     // completes this SideQuest
     // should only be called once all Tasks are complete
-    private void complete() {
+    protected void complete() {
         Log.d("QuestLog.System", "Completed SideQuest " + this.name);
         this.isComplete = true;
         questList.rewardUserFor(this);
