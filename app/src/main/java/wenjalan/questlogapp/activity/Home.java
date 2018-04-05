@@ -32,10 +32,13 @@ import wenjalan.questlogapp.questlog.SideQuest;
 import wenjalan.questlogapp.questlog.Task;
 import wenjalan.questlogapp.animation.QuestLogAnimation;
 import wenjalan.questlogapp.animation.RemoveQuestAnimation;
+import wenjalan.questlogapp.questlog.TimedQuest;
+import wenjalan.questlogapp.questlog.Timestamp;
 
 public class Home extends AppCompatActivity {
 
 // Constants //
+    public static final boolean DEBUG = true;
     private static final int ANIMATION_EXP_BAR_DURATION = 1000;
 
     // Request codes
@@ -51,9 +54,13 @@ public class Home extends AppCompatActivity {
         Log.d("QuestLog.Android", "CREATED activity Home");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         // set the animation flag
         this.animateBar = true;
         start();
+
+        // run debug
+        if (DEBUG) debugStart();
     }
 
     @Override
@@ -97,6 +104,28 @@ public class Home extends AppCompatActivity {
     // runs on startup
     public void start() {
         load();
+        render();
+    }
+
+    // runs on startup if in DEBUG mode
+    public void debugStart() {
+        // Log
+        Log.d("QuestLog.Android", "Starting debug...");
+
+        // set quest parameters
+        QuestList questList = Home.questLog.getUser().getQuestList();
+        String name = "Sample Timed Quest";
+        String desc = "Something you have to complete within a given time frame.";
+        int expReward = 25;
+        String perkCategory = null;
+        Timestamp timestamp = new Timestamp(2018, 1, 10, 0, 0);
+        Task[] tasks = {new Task("task0"), new Task("task1"), new Task("task2")};
+
+        // add a new timed quest
+        TimedQuest timedQuest = new TimedQuest(questList, name, desc, expReward, perkCategory, timestamp, tasks);
+        questList.addQuest(timedQuest);
+
+        // refresh
         render();
     }
 
@@ -313,6 +342,11 @@ public class Home extends AppCompatActivity {
         // tasks
         displayQuestTasks(questView, inflater, sideQuest);
 
+        // completion date
+        if (sideQuest instanceof TimedQuest) {
+            displayQuestCompleteByDate(questView, inflater, (TimedQuest) sideQuest);
+        }
+
         // add the view to the list
         questList.addView(questView);
     }
@@ -371,6 +405,16 @@ public class Home extends AppCompatActivity {
         taskCheckBox.setChecked(t.isComplete());
     }
 
+    // displays the Date before which a TimedQuest needs to be completed
+    private void displayQuestCompleteByDate(View questView, LayoutInflater inflater, TimedQuest quest) {
+        // get the date field View
+        TextView expireDateView = questView.findViewById(R.id.expire);
+        // set it to visible
+        expireDateView.setVisibility(View.VISIBLE);
+        // set the text to the expiry date
+        Timestamp date = quest.getExpiryDate();
+        expireDateView.setText("Expires " + date.getMonth() + "/" + date.getDay() + "/" + date.getYear());
+    }
 
 // Listeners //
     // called when the user taps the newQuestButton

@@ -44,4 +44,9 @@ public class TimedQuest extends SideQuest {
         }
         return true;
     }
+
+    // returns when this TimedQuest expires
+    public Timestamp getExpiryDate() {
+        return this.completeByDate;
+    }
 }

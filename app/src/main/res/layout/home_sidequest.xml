@@ -70,6 +70,20 @@
             app:layout_constraintEnd_toStartOf="@+id/editButton"
             app:layout_constraintTop_toTopOf="@+id/editButton" />
 
+        <TextView
+            android:id="@+id/expire"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/textExpires"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBackground"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            android:visibility="invisible"
+            app:layout_constraintBaseline_toBaselineOf="@+id/reward"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <ImageButton
             android:id="@+id/editButton"
             android:layout_width="wrap_content"

@@ -10,6 +10,7 @@
     <string name="textQuestDescription">Quest Description</string>
     <string name="textQuestTaskDescription">Task Description</string>
     <string name="textExpReward">0 EXP</string>
+    <string name="textExpires">Expires 00/00/0000</string>
 
     <!-- Create User -->
     <string name="hintUserName">Username</string>
